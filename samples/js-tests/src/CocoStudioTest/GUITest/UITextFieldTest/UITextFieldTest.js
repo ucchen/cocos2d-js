@@ -27,27 +27,27 @@
 var UITextFieldEditorTest = UIBaseLayer.extend({
     ctor: function () {
         this._super();
-        var root = ccs.uiReader.widgetFromJsonFile("res/cocosui/UIEditorTest/UITextField_Editor/ui_textfield_editor_1.json");
+        var root = this._parseUIFile("res/cocosui/CCS/TextField/textfield_1.json");
         this._mainNode.addChild(root);
 
         var back_label =ccui.helper.seekWidgetByName(root, "back");
         back_label.addTouchEventListener(this.backEvent,this);
 
         var textField_normal = ccui.helper.seekWidgetByName(root, "TextField_1109");
-        textField_normal.addEventListenerTextField(this.textFieldEvent,this);
+        textField_normal.addEventListener(this.textFieldEvent,this);
 
         var textField_max_character = ccui.helper.seekWidgetByName(root, "TextField_1110");
-        textField_max_character.addEventListenerTextField(this.textFieldEvent,this);
+        textField_max_character.addEventListener(this.textFieldEvent,this);
 
         var textField_password = ccui.helper.seekWidgetByName(root, "TextField_1107");
-        textField_password.addEventListenerTextField(this.textFieldEvent,this);
+        textField_password.addEventListener(this.textFieldEvent,this);
     },
     textFieldEvent: function (sender, type) {
         switch (type) {
-            case ccui.TextField. EVENT_ATTACH_WITH_ME:
+            case ccui.TextField. EVENT_ATTACH_WITH_IME:
                 this._topDisplayText.setString("attach with IME");
                 break;
-            case ccui.TextField. EVENT_DETACH_WITH_ME:
+            case ccui.TextField. EVENT_DETACH_WITH_IME:
                 this._topDisplayText.setString("detach with IME");
                 break;
             case ccui.TextField. EVENT_INSERT_TEXT:

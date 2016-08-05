@@ -26,16 +26,25 @@ THE SOFTWARE.
 #define  _RUNTIME__H_
 
 #include <string>
-#include <vector>
-using namespace std;
+#include "ScriptingCore.h"
 
-#define _MAX_PATH_ 512
+void recvBuf(int fd, char *pbuf, unsigned long bufsize);
 
-bool initRuntime();
+void sendBuf(int fd, const char *pbuf, unsigned long bufsize);
 
-bool startRuntime();
+std::string& replaceAll(std::string& str, const std::string& old_value, const std::string& new_value);
 
-bool reloadScript(const string& modulefile,bool reloadAll = false);
+std::string getIPAddress();
+
+const char* getRuntimeVersion();
+
+bool startScript();
+
+void initRuntime();
+
+void startRuntime();
+
+void endRuntime();
 
 #endif // _RUNTIME__H_
 

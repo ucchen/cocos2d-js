@@ -24,21 +24,33 @@
 // cocos2d constants
 //
 
-cc.ENGINE_VERSION = "Cocos2d-JS v3.0 RC0";
+// CCConfig.js
+//
+cc.ENGINE_VERSION = "Cocos2d-JS v3.6.1";
 
-cc.TARGET_PLATFORM = {
-    WINDOWS:0,
-    LINUX:1,
-    MACOS:2,
-    ANDROID:3,
-    IPHONE:4,
-    IPAD:5,
-    BLACKBERRY:6,
-    NACL:7,
-    EMSCRIPTEN:8,
-    MOBILE_BROWSER:100,
-    PC_BROWSER:101
-};
+cc.FIX_ARTIFACTS_BY_STRECHING_TEXEL = 0;
+cc.DIRECTOR_STATS_POSITION = {x: 0, y: 0};
+cc.DIRECTOR_FPS_INTERVAL = 0.5;
+cc.COCOSNODE_RENDER_SUBPIXEL = 1;
+cc.SPRITEBATCHNODE_RENDER_SUBPIXEL = 1;
+cc.OPTIMIZE_BLEND_FUNC_FOR_PREMULTIPLIED_ALPHA = 0;
+cc.TEXTURE_ATLAS_USE_TRIANGLE_STRIP = 0;
+cc.TEXTURE_ATLAS_USE_VAO = 0;
+cc.TEXTURE_NPOT_SUPPORT = 0;
+cc.RETINA_DISPLAY_SUPPORT = 1;
+cc.RETINA_DISPLAY_FILENAME_SUFFIX = "-hd";
+cc.USE_LA88_LABELS = 1;
+cc.SPRITE_DEBUG_DRAW = 0;
+cc.SPRITEBATCHNODE_DEBUG_DRAW = 0;
+cc.LABELBMFONT_DEBUG_DRAW = 0;
+cc.LABELATLAS_DEBUG_DRAW = 0;
+cc.IS_RETINA_DISPLAY_SUPPORTED = 1;
+cc.DEFAULT_ENGINE = cc.ENGINE_VERSION + "-native";
+cc.ENABLE_STACKABLE_ACTIONS = 1;
+cc.ENABLE_GL_STATE_CACHE = 1;
+
+
+// Resolution policies
 
 cc.ResolutionPolicy = {
     // The entire application is visible in the specified area without trying to preserve the original aspect ratio.
@@ -88,20 +100,9 @@ cc.DEVICE_ORIENTATION_PORTRAIT_UPSIDE_DOWN = 2;
 cc.DEVICE_ORIENTATION_LANDSCAPE_RIGHT = 3;
 cc.DEVICE_MAX_ORIENTATIONS = 2;
 
-cc.TEXTURE_PIXELFORMAT_RGBA8888 = 0;
-cc.TEXTURE_PIXELFORMAT_RGB888 = 1;
-cc.TEXTURE_PIXELFORMAT_RGB565 = 2;
-cc.TEXTURE_PIXELFORMAT_A8 = 3;
-cc.TEXTURE_PIXELFORMAT_I8 = 4;
-cc.TEXTURE_PIXELFORMAT_AI88 = 5;
-cc.TEXTURE_PIXELFORMAT_RGBA4444 = 6;
-cc.TEXTURE_PIXELFORMAT_RGB5A1 = 7;
-cc.TEXTURE_PIXELFORMAT_PVRTC4 = 8;
-cc.TEXTURE_PIXELFORMAT_PVRTC4 = 9;
-cc.TEXTURE_PIXELFORMAT_DEFAULT = cc.TEXTURE_PIXELFORMAT_RGBA8888;
-
 cc.IMAGE_FORMAT_JPEG = 0;
-cc.IMAGE_FORMAT_PNG = 0;
+cc.IMAGE_FORMAT_PNG = 1;
+cc.IMAGE_FORMAT_RAWDATA = 9;
 
 cc.TOUCH_ALL_AT_ONCE = 0;
 cc.TOUCH_ONE_BY_ONE = 1;
@@ -127,10 +128,13 @@ cc.MENU_STATE_TRACKING_TOUCH = 1;
 cc.MENU_HANDLER_PRIORITY = -128;
 cc.DEFAULT_PADDING = 5;
 
-cc.Scheduler.PRIORITY_SYSTEM	= -2147483648;
+cc.Scheduler.PRIORITY_SYSTEM    = -2147483648;
 
 var _Class = cc.Texture2D;
+
+_Class.PIXEL_FORMAT_NONE = -1;
 _Class.PIXEL_FORMAT_AUTO = 0;
+_Class.PIXEL_FORMAT_BGRA8888 = 1;
 _Class.PIXEL_FORMAT_RGBA8888 = 2;
 _Class.PIXEL_FORMAT_RGB888 = 3;
 _Class.PIXEL_FORMAT_RGB565 = 4;
@@ -140,8 +144,17 @@ _Class.PIXEL_FORMAT_AI88 = 7;
 _Class.PIXEL_FORMAT_RGBA4444 = 8;
 _Class.PIXEL_FORMAT_RGB5A1 = 9;
 _Class.PIXEL_FORMAT_PVRTC4 = 10;
+_Class.PIXEL_FORMAT_PVRTC4A = 11;
 _Class.PIXEL_FORMAT_PVRTC2 = 11;
-_Class.PIXEL_FORMAT_DEFAULT = _Class.PIXEL_FORMAT_RGBA8888;
+_Class.PIXEL_FORMAT_PVRTC2A = 13;
+_Class.PIXEL_FORMAT_ETC = 14;
+_Class.PIXEL_FORMAT_S3TC_DXT1 = 15;
+_Class.PIXEL_FORMAT_S3TC_DXT3 = 16;
+_Class.PIXEL_FORMAT_S3TC_DXT5 = 17;
+_Class.PIXEL_FORMAT_ATC_RGB = 18;
+_Class.PIXEL_FORMAT_ATC_EXPLICIT_ALPHA = 19;
+_Class.PIXEL_FORMAT_ATC_INTERPOLATED_ALPHA = 20;
+_Class.PIXEL_FORMAT_DEFAULT = _Class.PIXEL_FORMAT_AUTO;
 _Class.defaultPixelFormat = _Class.PIXEL_FORMAT_DEFAULT;
 
 // For blend
@@ -156,8 +169,14 @@ cc.ONE_MINUS_SRC_ALPHA = 0x0303;
 cc.ONE_MINUS_SRC_COLOR = 0x301;
 cc.ONE_MINUS_DST_ALPHA = 0x305;
 cc.ONE_MINUS_DST_COLOR = 0x0307;
-cc.ONE_MINUS_CONSTANT_ALPHA	= 0x8004;
-cc.ONE_MINUS_CONSTANT_COLOR	= 0x8002;
+cc.ONE_MINUS_CONSTANT_ALPHA = 0x8004;
+cc.ONE_MINUS_CONSTANT_COLOR = 0x8002;
+
+//texture parameters
+cc.LINEAR   = 0x2601;
+cc.REPEAT   = 0x2901;
+cc.CLAMP_TO_EDGE    = 0x812f;
+cc.MIRRORED_REPEAT   = 0x8370;
 
 cc.VERTEX_ATTRIB_FLAG_NONE = 0;
 cc.VERTEX_ATTRIB_FLAG_POSITION = 1 << 0;
@@ -181,15 +200,21 @@ cc.UNIFORM_RANDOM01 = 6;
 cc.UNIFORM_SAMPLER = 7;
 cc.UNIFORM_MAX = 8;
 
+// Shaders 
+cc.UNIFORM_TIME_S = "CC_Time";
+cc.UNIFORM_COS_TIME_S   = 'CC_CosTime';
+cc.UNIFORM_COSTIME_S = "CC_CosTime";
+cc.UNIFORM_SIN_TIME_S   = 'CC_SinTime';
+cc.UNIFORM_SINTIME_S = "CC_SinTime";
 cc.UNIFORM_PMATRIX_S = "CC_PMatrix";
 cc.UNIFORM_MVMATRIX_S = "CC_MVMatrix";
 cc.UNIFORM_MVPMATRIX_S = "CC_MVPMatrix";
-cc.UNIFORM_TIME_S = "CC_Time";
-cc.UNIFORM_SINTIME_S = "CC_SinTime";
-cc.UNIFORM_COSTIME_S = "CC_CosTime";
-cc.UNIFORM_RANDOM01_S = "CC_Random01";
-cc.UNIFORM_SAMPLER_S = "CC_Texture0";
-cc.UNIFORM_ALPHA_TEST_VALUE_S = "CC_alpha_value";
+cc.UNIFORM_P_MATRIX_S   = 'CC_PMatrix';
+cc.UNIFORM_MV_MATRIX_S  = 'CC_MVMatrix';
+cc.UNIFORM_MVP_MATRIX_S = 'CC_MVPMatrix';
+cc.UNIFORM_RANDOM01_S   = 'CC_Random01';
+cc.UNIFORM_SAMPLER_S    = 'CC_Texture0';
+cc.UNIFORM_ALPHA_TEST_VALUE_S = "CC_AlphaValue";
 
 cc.ITEM_SIZE = 32;
 
@@ -206,34 +231,32 @@ cc.g_NumberOfDraws = 0;        //CCDirector.js
 
 cc.PRIORITY_NON_SYSTEM = cc.PRIORITY_SYSTEM + 1;          //CCScheduler.js
 
-cc.Node.ON_ENTER = 0;          //CCNode.js
-cc.Node.ON_EXIT = 1;
-cc.Node.ON_ENTER_TRANSITION_DID_FINISH = 2;
-cc.Node.ON_EXIT_TRANSITOIN_DID_START = 3;
-cc.Node.ON_CLEAN_UP = 4;
 cc.s_globalOrderOfArrival = 1;
 
 cc.Event.TOUCH = 0;                  //CCEvent.js
 cc.Event.KEYBOARD = 1;
 cc.Event.ACCELERATION = 2;
 cc.Event.MOUSE = 3;
-cc.Event.CUSTOM = 4;
+cc.Event.FOCUS = 4
+//game controller 5
+cc.Event.CUSTOM = 6;
 cc.EventMouse.NONE = 0;
 cc.EventMouse.DOWN = 1;
 cc.EventMouse.UP = 2;
 cc.EventMouse.MOVE = 3;
 cc.EventMouse.SCROLL = 4;
 cc.EventMouse.BUTTON_LEFT = 0;
-cc.EventMouse.BUTTON_RIGHT = 2;
-cc.EventMouse.BUTTON_MIDDLE = 1;
+cc.EventMouse.BUTTON_RIGHT = 1;
+cc.EventMouse.BUTTON_MIDDLE = 2;
 cc.EventMouse.BUTTON_4 = 3;
 cc.EventMouse.BUTTON_5 = 4;
 cc.EventMouse.BUTTON_6 = 5;
 cc.EventMouse.BUTTON_7 = 6;
 cc.EventMouse.BUTTON_8 = 7;
 cc.EventTouch.MAX_TOUCHES = 5;
+cc.EventTouch.EventCode = {BEGAN: 0, MOVED: 1, ENDED: 2, CANCELLED: 3};
 
-cc.DEFAULT_SPRITE_BATCH_CAPACITY = 29;                  //CCSpriteBatchNode.js
+cc.SpriteBatchNode.DEFAULT_CAPACITY = 29;                  //CCSpriteBatchNode.js
 
 cc.ParticleSystem.SHAPE_MODE = 0;            //CCParticleSystem.js
 cc.ParticleSystem.TEXTURE_MODE = 1;
@@ -261,103 +284,6 @@ cc.SCENE_FADE = 4208917214;             //CCTransition.js
 cc.SCENE_RADIAL = 0xc001;               //CCTransitionProgress.js
 
 
-cc.KEY = {
-    //android
-    back:6,
-    menu:15,
-    //desktop
-    backspace:7,
-    tab:8,
-    enter:32,
-    shift:12,
-    ctrl:13,
-    alt:14,
-    pause:1,
-    capslock:11,
-    escape:6,
-    pageup:35,
-    pagedown:41,
-    end:21,
-    home:33,
-    left:23,
-    up:25,
-    right:24,
-    down:26,
-    insert:17,
-    Delete:20,
-    0:73,
-    1:74,
-    2:75,
-    3:76,
-    4:77,
-    5:78,
-    6:79,
-    7:80,
-    8:81,
-    9:82,
-    a:121,
-    b:122,
-    c:123,
-    d:124,
-    e:125,
-    f:126,
-    g:127,
-    h:128,
-    i:129,
-    j:130,
-    k:131,
-    l:132,
-    m:133,
-    n:134,
-    o:135,
-    p:136,
-    q:137,
-    r:138,
-    s:139,
-    t:140,
-    u:141,
-    v:142,
-    w:143,
-    x:144,
-    y:145,
-    z:146,
-    '*':30,
-    '+':28,
-    '-':29,
-    'numdel':71,
-    '/':31,
-    f1:44,
-    f2:45,
-    f3:46,
-    f4:47,
-    f5:48,
-    f6:49,
-    f7:50,
-    f8:51,
-    f9:52,
-    f10:53,
-    f11:54,
-    f12:55,
-    numlock:27,
-    scrolllock:2,
-    semicolon:84,
-    ',':69,
-    equal:86,
-    '=':86,
-    ';':84,
-    comma:69,
-    '.':71,
-    period:71,
-    forwardslash:72,
-    grave:120,
-    '[':116,
-    openbracket:116,
-    ']':118,
-    closebracket:118,
-    backslash:117,
-    quote:58,
-    space:56
-};
 //
 // CCMacro.js export
 //
@@ -413,12 +339,12 @@ cc.UINT_MAX = 0xffffffff;
  * @deprecated
  */
 cc.swap = function (x, y, ref) {
-	if ((typeof ref) == 'object' && (typeof ref.x) != 'undefined' && (typeof ref.y) != 'undefined') {
-		var tmp = ref[x];
-		ref[x] = ref[y];
-		ref[y] = tmp;
-	} else
-		cc.log("cc.swap is being modified from original macro, please check usage");
+    if ((typeof ref) == 'object' && (typeof ref.x) != 'undefined' && (typeof ref.y) != 'undefined') {
+        var tmp = ref[x];
+        ref[x] = ref[y];
+        ref[y] = tmp;
+    } else
+        cc.log("cc.swap is being modified from original macro, please check usage");
 };
 
 /**
@@ -434,7 +360,7 @@ cc.swap = function (x, y, ref) {
  * cc.lerp(2,10,0.2)//returns 3.6
  */
 cc.lerp = function (a, b, r) {
-	return a + (b - a) * r;
+    return a + (b - a) * r;
 };
 
 /**
@@ -443,7 +369,7 @@ cc.lerp = function (a, b, r) {
  * @returns {number}
  */
 cc.rand = function () {
-	return Math.random() * 0xffffff;
+    return Math.random() * 0xffffff;
 };
 
 /**
@@ -452,7 +378,7 @@ cc.rand = function () {
  * @function
  */
 cc.randomMinus1To1 = function () {
-	return (Math.random() - 0.5) * 2;
+    return (Math.random() - 0.5) * 2;
 };
 
 /**
@@ -469,7 +395,7 @@ cc.random0To1 = Math.random;
  * @function
  */
 cc.degreesToRadians = function (angle) {
-	return angle * cc.RAD;
+    return angle * cc.RAD;
 };
 
 /**
@@ -478,8 +404,8 @@ cc.degreesToRadians = function (angle) {
  * @return {Number}
  * @function
  */
-cc.radiansToDegress = function (angle) {
-	return angle * cc.DEG;
+cc.radiansToDegrees = function (angle) {
+    return angle * cc.DEG;
 };
 
 /**
@@ -508,12 +434,12 @@ cc.BLEND_DST = 0x0303;
  * @function
  */
 cc.nodeDrawSetup = function (node) {
-	//cc.glEnable(node._glServerState);
-	if (node._shaderProgram) {
-		//cc._renderContext.useProgram(node._shaderProgram._programObj);
-		node._shaderProgram.use();
-		node._shaderProgram.setUniformForModelViewAndProjectionMatrixWithMat4();
-	}
+    //cc.glEnable(node._glServerState);
+    if (node._shaderProgram) {
+        //cc._renderContext.useProgram(node._shaderProgram._programObj);
+        node._shaderProgram.use();
+        node._shaderProgram.setUniformForModelViewAndProjectionMatrixWithMat4();
+    }
 };
 
 /**
@@ -527,12 +453,12 @@ cc.nodeDrawSetup = function (node) {
  * @function
  */
 cc.enableDefaultGLStates = function () {
-	//TODO OPENGL STUFF
-	/*
-	 glEnableClientState(GL_VERTEX_ARRAY);
-	 glEnableClientState(GL_COLOR_ARRAY);
-	 glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	 glEnable(GL_TEXTURE_2D);*/
+    //TODO OPENGL STUFF
+    /*
+     glEnableClientState(GL_VERTEX_ARRAY);
+     glEnableClientState(GL_COLOR_ARRAY);
+     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+     glEnable(GL_TEXTURE_2D);*/
 };
 
 /**
@@ -545,13 +471,13 @@ cc.enableDefaultGLStates = function () {
  * @function
  */
 cc.disableDefaultGLStates = function () {
-	//TODO OPENGL
-	/*
-	 glDisable(GL_TEXTURE_2D);
-	 glDisableClientState(GL_COLOR_ARRAY);
-	 glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	 glDisableClientState(GL_VERTEX_ARRAY);
-	 */
+    //TODO OPENGL
+    /*
+     glDisable(GL_TEXTURE_2D);
+     glDisableClientState(GL_COLOR_ARRAY);
+     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+     glDisableClientState(GL_VERTEX_ARRAY);
+     */
 };
 
 /**
@@ -563,7 +489,7 @@ cc.disableDefaultGLStates = function () {
  * @function
  */
 cc.incrementGLDraws = function (addNumber) {
-	cc.g_NumberOfDraws += addNumber;
+    cc.g_NumberOfDraws += addNumber;
 };
 
 /**
@@ -580,9 +506,9 @@ cc.FLT_EPSILON = 0.0000001192092896;
  * @function
  */
 cc.contentScaleFactor = cc.IS_RETINA_DISPLAY_SUPPORTED ? function () {
-	return cc.director.getContentScaleFactor();
+    return cc.director.getContentScaleFactor();
 } : function () {
-	return 1;
+    return 1;
 };
 
 /**
@@ -592,8 +518,8 @@ cc.contentScaleFactor = cc.IS_RETINA_DISPLAY_SUPPORTED ? function () {
  * @function
  */
 cc.pointPointsToPixels = function (points) {
-	var scale = cc.contentScaleFactor();
-	return cc.p(points.x * scale, points.y * scale);
+    var scale = cc.contentScaleFactor();
+    return cc.p(points.x * scale, points.y * scale);
 };
 
 /**
@@ -602,14 +528,14 @@ cc.pointPointsToPixels = function (points) {
  * @function
  */
 cc.pointPixelsToPoints = function (pixels) {
-	var scale = cc.contentScaleFactor();
-	return cc.p(pixels.x / scale, pixels.y / scale);
+    var scale = cc.contentScaleFactor();
+    return cc.p(pixels.x / scale, pixels.y / scale);
 };
 
 cc._pointPixelsToPointsOut = function(pixels, outPoint){
-	var scale = cc.contentScaleFactor();
-	outPoint.x = pixels.x / scale;
-	outPoint.y = pixels.y / scale;
+    var scale = cc.contentScaleFactor();
+    outPoint.x = pixels.x / scale;
+    outPoint.y = pixels.y / scale;
 };
 
 /**
@@ -619,8 +545,8 @@ cc._pointPixelsToPointsOut = function(pixels, outPoint){
  * @function
  */
 cc.sizePointsToPixels = function (sizeInPoints) {
-	var scale = cc.contentScaleFactor();
-	return cc.size(sizeInPoints.width * scale, sizeInPoints.height * scale);
+    var scale = cc.contentScaleFactor();
+    return cc.size(sizeInPoints.width * scale, sizeInPoints.height * scale);
 };
 
 /**
@@ -630,14 +556,14 @@ cc.sizePointsToPixels = function (sizeInPoints) {
  * @function
  */
 cc.sizePixelsToPoints = function (sizeInPixels) {
-	var scale = cc.contentScaleFactor();
-	return cc.size(sizeInPixels.width / scale, sizeInPixels.height / scale);
+    var scale = cc.contentScaleFactor();
+    return cc.size(sizeInPixels.width / scale, sizeInPixels.height / scale);
 };
 
 cc._sizePixelsToPointsOut = function (sizeInPixels, outSize) {
-	var scale = cc.contentScaleFactor();
-	outSize.width = sizeInPixels.width / scale;
-	outSize.height = sizeInPixels.height / scale;
+    var scale = cc.contentScaleFactor();
+    outSize.width = sizeInPixels.width / scale;
+    outSize.height = sizeInPixels.height / scale;
 };
 
 /**
@@ -646,11 +572,11 @@ cc._sizePixelsToPointsOut = function (sizeInPixels, outSize) {
  * @function
  */
 cc.rectPixelsToPoints = cc.IS_RETINA_DISPLAY_SUPPORTED ? function (pixel) {
-	var scale = cc.contentScaleFactor();
-	return cc.rect(pixel.x / scale, pixel.y / scale,
-		pixel.width / scale, pixel.height / scale);
+    var scale = cc.contentScaleFactor();
+    return cc.rect(pixel.x / scale, pixel.y / scale,
+        pixel.width / scale, pixel.height / scale);
 } : function (p) {
-	return p;
+    return p;
 };
 
 /**
@@ -659,20 +585,20 @@ cc.rectPixelsToPoints = cc.IS_RETINA_DISPLAY_SUPPORTED ? function (pixel) {
  * @function
  */
 cc.rectPointsToPixels = cc.IS_RETINA_DISPLAY_SUPPORTED ? function (point) {
-	var scale = cc.contentScaleFactor();
-	return cc.rect(point.x * scale, point.y * scale,
-		point.width * scale, point.height * scale);
+    var scale = cc.contentScaleFactor();
+    return cc.rect(point.x * scale, point.y * scale,
+        point.width * scale, point.height * scale);
 } : function (p) {
-	return p;
+    return p;
 };
 
 cc.checkGLErrorDebug = function () {
-	if (cc.renderMode == cc._RENDER_TYPE_WEBGL) {
-		var _error = cc._renderContext.getError();
-		if (_error) {
-			cc.log(CC._localZOrder.checkGLErrorDebug, _error);
-		}
-	}
+    if (cc.renderMode == cc._RENDER_TYPE_WEBGL) {
+        var _error = cc._renderContext.getError();
+        if (_error) {
+            cc.log(CC._localZOrder.checkGLErrorDebug, _error);
+        }
+    }
 };
 
 
@@ -1131,6 +1057,14 @@ cc.rectIntersectsRect = function( rectA, rectB )
     return bool;
 };
 
+cc.rectOverlapsRect = function (rectA, rectB)
+{
+    return !((rectA.x + rectA.width < rectB.x) ||
+             (rectB.x + rectB.width < rectA.x) ||
+             (rectA.y + rectA.height < rectB.y) ||
+             (rectB.y + rectB.height < rectA.y));
+};
+
 cc.rectUnion = function (rectA, rectB) {
     var rect = cc.rect(0, 0, 0, 0);
     rect.x = Math.min(rectA.x, rectB.x);
@@ -1358,48 +1292,48 @@ cc.associateWithNative = function( jsobj, superclass_or_instance ) {};
 // This is the recommended way to do it
 //
 cc.inherits = function (childCtor, parentCtor) {
-	/** @constructor */
-	function tempCtor() {};
-	tempCtor.prototype = parentCtor.prototype;
-	childCtor.superClass_ = parentCtor.prototype;
-	childCtor.prototype = new tempCtor();
-	childCtor.prototype.constructor = childCtor;
+    /** @constructor */
+    function tempCtor() {};
+    tempCtor.prototype = parentCtor.prototype;
+    childCtor.superClass_ = parentCtor.prototype;
+    childCtor.prototype = new tempCtor();
+    childCtor.prototype.constructor = childCtor;
 
     // Copy "static" method, but doesn't generate subclasses.
-//	for( var i in parentCtor ) {
-//		childCtor[ i ] = parentCtor[ i ];
-//	}
+//  for( var i in parentCtor ) {
+//      childCtor[ i ] = parentCtor[ i ];
+//  }
 };
 cc.base = function(me, opt_methodName, var_args) {
-	var caller = arguments.callee.caller;
-	if (caller.superClass_) {
-		// This is a constructor. Call the superclass constructor.
-		ret =  caller.superClass_.constructor.apply( me, Array.prototype.slice.call(arguments, 1));
-		return ret;
-	}
+    var caller = arguments.callee.caller;
+    if (caller.superClass_) {
+        // This is a constructor. Call the superclass constructor.
+        ret =  caller.superClass_.constructor.apply( me, Array.prototype.slice.call(arguments, 1));
+        return ret;
+    }
 
-	var args = Array.prototype.slice.call(arguments, 2);
-	var foundCaller = false;
-	for (var ctor = me.constructor;
+    var args = Array.prototype.slice.call(arguments, 2);
+    var foundCaller = false;
+    for (var ctor = me.constructor;
         ctor; ctor = ctor.superClass_ && ctor.superClass_.constructor) {
-		if (ctor.prototype[opt_methodName] === caller) {
-			foundCaller = true;
-		} else if (foundCaller) {
-			return ctor.prototype[opt_methodName].apply(me, args);
-		}
-	}
+        if (ctor.prototype[opt_methodName] === caller) {
+            foundCaller = true;
+        } else if (foundCaller) {
+            return ctor.prototype[opt_methodName].apply(me, args);
+        }
+    }
 
-	// If we did not find the caller in the prototype chain,
-	// then one of two things happened:
-	// 1) The caller is an instance method.
-	// 2) This method was not called by the right caller.
-	if (me[opt_methodName] === caller) {
-		return me.constructor.prototype[opt_methodName].apply(me, args);
-	} else {
-		throw Error(
-					'cc.base called from a method of one name ' +
-					'to a method of a different name');
-	}
+    // If we did not find the caller in the prototype chain,
+    // then one of two things happened:
+    // 1) The caller is an instance method.
+    // 2) This method was not called by the right caller.
+    if (me[opt_methodName] === caller) {
+        return me.constructor.prototype[opt_methodName].apply(me, args);
+    } else {
+        throw Error(
+                    'cc.base called from a method of one name ' +
+                    'to a method of a different name');
+    }
 };
 
 
@@ -1427,7 +1361,7 @@ cc.Class.extend = function (prop) {
     // Instantiate a base class (but only create the instance,
     // don't run the init constructor)
     initializing = true;
-    var prototype = new this();
+    var prototype = Object.create(_super);
     initializing = false;
     fnTest = /xyz/.test(function(){xyz;}) ? /\b_super\b/ : /.*/;
 
@@ -1489,16 +1423,29 @@ cc.Class.extend = function (prop) {
 };
 
 cc.Node.extend = cc.Class.extend;
+cc.AtlasNode.extend = cc.Class.extend;
 cc.Layer.extend = cc.Class.extend;
 cc.LayerGradient.extend = cc.Class.extend;
 cc.LayerColor.extend = cc.Class.extend;
+cc.LayerMultiplex.extend = cc.Class.extend;
 cc.Sprite.extend = cc.Class.extend;
+cc.SpriteBatchNode.extend = cc.Class.extend;
 cc.SpriteFrame.extend = cc.Class.extend;
+cc.LabelTTF.extend = cc.Class.extend;
+cc.LabelBMFont.extend = cc.Class.extend;
+cc.LabelAtlas.extend = cc.Class.extend;
 cc.Menu.extend = cc.Class.extend;
 cc.MenuItem.extend = cc.Class.extend;
+cc.MenuItemLabel.extend = cc.Class.extend;
 cc.MenuItemFont.extend = cc.Class.extend;
+cc.MenuItemAtlasFont.extend = cc.Class.extend;
+cc.MenuItemSprite.extend = cc.Class.extend;
+cc.MenuItemImage.extend = cc.Class.extend;
 cc.MenuItemToggle.extend = cc.Class.extend;
 cc.Scene.extend = cc.Class.extend;
+cc.ClippingNode.extend = cc.Class.extend;
+cc.ProgressTimer.extend = cc.Class.extend;
+cc.ParallaxNode.extend = cc.Class.extend;
 cc.DrawNode.extend = cc.Class.extend;
 cc.Component.extend = cc.Class.extend;
 cc.GridBase.extend = cc.Class.extend;
@@ -1507,7 +1454,6 @@ cc.TiledGrid3D.extend = cc.Class.extend;
 cc.MotionStreak.extend = cc.Class.extend;
 cc.ParticleBatchNode.extend = cc.Class.extend;
 cc.ParticleSystem.extend = cc.Class.extend;
-cc.PhysicsSprite.extend = cc.Class.extend;
 cc.TextFieldTTF.extend = cc.Class.extend;
 cc.RenderTexture.extend = cc.Class.extend;
 cc.TileMapAtlas.extend = cc.Class.extend;
@@ -1515,33 +1461,19 @@ cc.TMXLayer.extend = cc.Class.extend;
 cc.TMXTiledMap.extend = cc.Class.extend;
 cc.TMXMapInfo.extend = cc.Class.extend;
 cc.TransitionScene.extend = cc.Class.extend;
-ccs.Armature.extend = cc.Class.extend;
-ccui.Widget.extend = cc.Class.extend;
-ccui.Button.extend = cc.Class.extend;
-ccui.CheckBox.extend = cc.Class.extend;
-ccui.ImageView.extend = cc.Class.extend;
-ccui.LoadingBar.extend = cc.Class.extend;
-ccui.RichText.extend = cc.Class.extend;
-ccui.Slider.extend = cc.Class.extend;
-ccui.Text.extend = cc.Class.extend;
-ccui.TextAtlas.extend = cc.Class.extend;
-ccui.TextBMFont.extend = cc.Class.extend;
-ccui.TextField.extend = cc.Class.extend;
-ccui.Layout.extend = cc.Class.extend;
-ccui.ListView.extend = cc.Class.extend;
-ccui.PageView.extend = cc.Class.extend;
-ccui.ScrollView.extend = cc.Class.extend;
+cc.GLProgram.extend = cc.Class.extend;
+
 
 // Cocos2d-html5 supports multi scene resources preloading.
 // This is a compatible function for JSB.
 cc.Loader = cc.Class.extend({
-	initWith:function (resources, selector, target) {
-		if (selector) {
-			this._selector = selector;
-			this._target = target;
-		}
-		this._selector.call(this._target);
-	}
+    initWith:function (resources, selector, target) {
+        if (selector) {
+            this._selector = selector;
+            this._target = target;
+        }
+        this._selector.call(this._target);
+    }
 });
 
 cc.Loader.preload = function (resources, selector, target) {
@@ -1597,7 +1529,12 @@ var setTimeout = function (code, delay) {
     var target = new WindowTimeFun(code);
     if (arguments.length > 2)
         target._args = Array.prototype.slice.call(arguments, 2);
-    cc.Director.getInstance().getScheduler().scheduleCallbackForTarget(target, target.fun, delay / 1000, 0, 0, false);
+    var original = target.fun;
+    target.fun = function () {
+        original.apply(this, arguments);
+        clearTimeout(target._intervalId);
+    }
+    cc.director.getScheduler().schedule(target.fun, target, delay / 1000, 0, 0, false, target._intervalId+"");
     _windowTimeFunHash[target._intervalId] = target;
     return target._intervalId;
 };
@@ -1612,7 +1549,7 @@ var setInterval = function (code, delay) {
     var target = new WindowTimeFun(code);
     if (arguments.length > 2)
         target._args = Array.prototype.slice.call(arguments, 2);
-    cc.director.getScheduler().scheduleCallbackForTarget(target, target.fun, delay / 1000, cc.REPEAT_FOREVER, 0, false);
+    cc.director.getScheduler().schedule(target.fun, target, delay / 1000, cc.REPEAT_FOREVER, 0, false, target._intervalId+"");
     _windowTimeFunHash[target._intervalId] = target;
     return target._intervalId;
 };
@@ -1624,7 +1561,7 @@ var setInterval = function (code, delay) {
 var clearInterval = function (intervalId) {
     var target = _windowTimeFunHash[intervalId];
     if (target) {
-        cc.Director.getInstance().getScheduler().unscheduleCallbackForTarget(target, target.fun);
+        cc.director.getScheduler().unschedule(target._intervalId+"", target);
         delete _windowTimeFunHash[intervalId];
     }
 };
@@ -1638,7 +1575,10 @@ cc.EventListener.TOUCH_ALL_AT_ONCE = 2;
 cc.EventListener.KEYBOARD = 3;
 cc.EventListener.MOUSE = 4;
 cc.EventListener.ACCELERATION = 5;
-cc.EventListener.CUSTOM = 6;
+cc.EventListener.FOCUS = 6;
+//game controller 7
+cc.EventListener.CUSTOM = 8;
+
 
 cc.EventListener.create = function(argObj){
     if(!argObj || !argObj.event){
@@ -1667,6 +1607,8 @@ cc.EventListener.create = function(argObj){
     else if(listenerType === cc.EventListener.ACCELERATION){
         listener = cc.EventListenerAcceleration.create(argObj.callback);
         delete argObj.callback;
+    }else if(listenerType === cc.EventListener.FOCUS){
+        listener = cc.EventListenerFocus.create();
     }
     else
     {
@@ -1700,6 +1642,8 @@ cc.eventManager.addListener = function(listener, nodeOrPriority) {
     } else {
         cc.eventManager.addEventListenerWithSceneGraphPriority(listener, nodeOrPriority);
     }
+
+    return listener;
 };
 
 cc.eventManager.dispatchCustomEvent = function (eventName, optionalUserData) {
@@ -1748,6 +1692,12 @@ cc.EventListenerKeyboard.prototype.clone = function() {
     return ret;
 };
 
+cc.EventListenerFocus.prototype.clone = function() {
+    var ret = cc.EventListenerFocus.create();
+    ret.onFocusChanged = this.onFocusChanged;
+    return ret;
+};
+
 cc.EventListenerMouse.prototype.clone = function() {
     var ret = cc.EventListenerMouse.create();
     ret._onMouseDown = this._onMouseDown;
@@ -1771,6 +1721,18 @@ cc.EventListenerMouse.prototype.onMouseDown = function(event) {
     this._previousX = event.getLocationX();
     this._previousY = event.getLocationY();
     this._onMouseDown(event);
+};
+
+cc.EventListenerKeyboard.prototype._onKeyPressed = function(keyCode, event) {
+    if (!this.onKeyPressed)
+        return;
+    this.onKeyPressed(jsbKeyArr[keyCode], event);
+};
+
+cc.EventListenerKeyboard.prototype._onKeyReleased = function(keyCode, event) {
+    if (!this.onKeyReleased)
+        return;
+    this.onKeyReleased(jsbKeyArr[keyCode], event);
 };
 
 cc.EventMouse.prototype.getLocation = function(){
@@ -1890,7 +1852,7 @@ cc.FontDefinition = function () {
     this.verticalAlign = cc.VERTICAL_TEXT_ALIGNMENT_TOP;
     this.fillStyle = cc.color(255, 255, 255, 255);
     this.boundingWidth = 0;
-	this.boundingHeight = 0;
+    this.boundingHeight = 0;
 
     this.strokeEnabled = false;
     this.strokeStyle = cc.color(255, 255, 255, 255);
@@ -1898,7 +1860,7 @@ cc.FontDefinition = function () {
 
     this.shadowEnabled = false;
     this.shadowOffsetX = 0;
-	this.shadowOffsetY = 0;
+    this.shadowOffsetY = 0;
     this.shadowBlur = 0;
     this.shadowOpacity = 1.0;
 };
@@ -1965,6 +1927,18 @@ cc.arrayAppendObjectsToIndex = function(arr, addObjs,index){
     return arr;
 };
 
+/**
+ * Copy an array's item to a new array (its performance is better than Array.slice)
+ * @param {Array} arr
+ * @returns {Array}
+ */
+cc.copyArray = function(arr){
+    var i, len = arr.length, arr_clone = new Array(len);
+    for (i = 0; i < len; i += 1)
+        arr_clone[i] = arr[i];
+    return arr_clone;
+};
+
 
 
 //
@@ -1972,156 +1946,155 @@ cc.arrayAppendObjectsToIndex = function(arr, addObjs,index){
 //
 
 cc.cardinalSplineAt = function (p0, p1, p2, p3, tension, t) {
-	var t2 = t * t;
-	var t3 = t2 * t;
+    var t2 = t * t;
+    var t3 = t2 * t;
 
-	var s = (1 - tension) / 2;
+    var s = (1 - tension) / 2;
 
-	var b1 = s * ((-t3 + (2 * t2)) - t);                      // s(-t3 + 2 t2 - t)P1
-	var b2 = s * (-t3 + t2) + (2 * t3 - 3 * t2 + 1);          // s(-t3 + t2)P2 + (2 t3 - 3 t2 + 1)P2
-	var b3 = s * (t3 - 2 * t2 + t) + (-2 * t3 + 3 * t2);      // s(t3 - 2 t2 + t)P3 + (-2 t3 + 3 t2)P3
-	var b4 = s * (t3 - t2);                                   // s(t3 - t2)P4
+    var b1 = s * ((-t3 + (2 * t2)) - t);                      // s(-t3 + 2 t2 - t)P1
+    var b2 = s * (-t3 + t2) + (2 * t3 - 3 * t2 + 1);          // s(-t3 + t2)P2 + (2 t3 - 3 t2 + 1)P2
+    var b3 = s * (t3 - 2 * t2 + t) + (-2 * t3 + 3 * t2);      // s(t3 - 2 t2 + t)P3 + (-2 t3 + 3 t2)P3
+    var b4 = s * (t3 - t2);                                   // s(t3 - t2)P4
 
-	var x = (p0.x * b1 + p1.x * b2 + p2.x * b3 + p3.x * b4);
-	var y = (p0.y * b1 + p1.y * b2 + p2.y * b3 + p3.y * b4);
-	return cc.p(x, y);
+    var x = (p0.x * b1 + p1.x * b2 + p2.x * b3 + p3.x * b4);
+    var y = (p0.y * b1 + p1.y * b2 + p2.y * b3 + p3.y * b4);
+    return cc.p(x, y);
 };
 
 cc._DrawNode = cc.DrawNode;
 cc.DrawNode = cc._DrawNode.extend({
-	_drawColor: cc.color(255, 255, 255, 255),
-	_lineWidth: 1,
+    _drawColor: cc.color(255, 255, 255, 255),
+    _lineWidth: 1,
 
-	setLineWidth: function (width) {
-		this._lineWidth = width;
-	},
+    setLineWidth: function (width) {
+        this._lineWidth = width;
+    },
 
-	getLineWidth: function () {
-		return this._lineWidth;
-	},
+    getLineWidth: function () {
+        return this._lineWidth;
+    },
 
-	setDrawColor: function(color) {
-		var locDrawColor = this._drawColor;
-		locDrawColor.r = color.r;
-		locDrawColor.g = color.g;
-		locDrawColor.b = color.b;
-		locDrawColor.a = (color.a == null) ? 255 : color.a;
-	},
+    setDrawColor: function(color) {
+        var locDrawColor = this._drawColor;
+        locDrawColor.r = color.r;
+        locDrawColor.g = color.g;
+        locDrawColor.b = color.b;
+        locDrawColor.a = (color.a == null) ? 255 : color.a;
+    },
 
-	getDrawColor: function () {
-		return  cc.color(this._drawColor.r, this._drawColor.g, this._drawColor.b, this._drawColor.a);
-	},
+    getDrawColor: function () {
+        return  cc.color(this._drawColor.r, this._drawColor.g, this._drawColor.b, this._drawColor.a);
+    },
 
-	drawRect: function (origin, destination, fillColor, lineWidth, lineColor) {
-		lineWidth = lineWidth || this._lineWidth;
-		lineColor = lineColor || this._drawColor;
-		var points = [origin, cc.p(origin.x, destination.y), destination, cc.p(destination.x, origin.y)];
-		if (fillColor)
-			cc._DrawNode.prototype.drawPoly.call(this, points, fillColor, lineWidth, lineColor);
-		else {
-			points.push(origin);
-			var drawSeg = cc._DrawNode.prototype.drawSegment;
-			for (var i = 0, len = points.length; i < len - 1; i++)
-				drawSeg.call(this, points[i], points[i + 1], lineWidth, lineColor);
-		}
-	},
+    drawRect: function (origin, destination, fillColor, lineWidth, lineColor) {
+        lineWidth = lineWidth || this._lineWidth;
+        lineColor = lineColor || this._drawColor;
+        var points = [origin, cc.p(origin.x, destination.y), destination, cc.p(destination.x, origin.y)];
+        if (fillColor)
+            cc._DrawNode.prototype.drawPoly.call(this, points, fillColor, lineWidth, lineColor);
+        else {
+            points.push(origin);
+            var drawSeg = cc._DrawNode.prototype.drawSegment;
+            for (var i = 0, len = points.length; i < len - 1; i++)
+                drawSeg.call(this, points[i], points[i + 1], lineWidth, lineColor);
+        }
+    },
 
-	drawCircle: function (center, radius, angle, segments, drawLineToCenter, lineWidth, color) {
-		lineWidth = lineWidth || this._lineWidth;
-		color = color || this._drawColor;
-		if (color.a == null)
-			color.a = 255;
-		var coef = 2.0 * Math.PI / segments, vertices = [], i, len;
-		for (i = 0; i <= segments; i++) {
-			var rads = i * coef;
-			var j = radius * Math.cos(rads + angle) + center.x;
-			var k = radius * Math.sin(rads + angle) + center.y;
-			vertices.push(cc.p(j, k));
-		}
-		if (drawLineToCenter)
-			vertices.push(cc.p(center.x, center.y));
+    drawCircle: function (center, radius, angle, segments, drawLineToCenter, lineWidth, color) {
+        lineWidth = lineWidth || this._lineWidth;
+        color = color || this._drawColor;
+        if (color.a == null)
+            color.a = 255;
+        var coef = 2.0 * Math.PI / segments, vertices = [], i, len;
+        for (i = 0; i <= segments; i++) {
+            var rads = i * coef;
+            var j = radius * Math.cos(rads + angle) + center.x;
+            var k = radius * Math.sin(rads + angle) + center.y;
+            vertices.push(cc.p(j, k));
+        }
+        if (drawLineToCenter)
+            vertices.push(cc.p(center.x, center.y));
 
-		lineWidth *= 0.5;
-		var drawSeg = cc._DrawNode.prototype.drawSegment;
-		for (i = 0, len = vertices.length; i < len - 1; i++)
-			drawSeg.call(this, vertices[i], vertices[i + 1], lineWidth, color);
-	},
+        lineWidth *= 0.5;
+        var drawSeg = cc._DrawNode.prototype.drawSegment;
+        for (i = 0, len = vertices.length; i < len - 1; i++)
+            drawSeg.call(this, vertices[i], vertices[i + 1], lineWidth, color);
+    },
 
-	drawQuadBezier: function (origin, control, destination, segments, lineWidth, color) {
-		lineWidth = lineWidth || this._lineWidth;
-		color = color || this._drawColor;
-		cc._DrawNode.prototype.drawQuadBezier.call(this, origin, control, destination, segments, color);
-	},
+    drawQuadBezier: function (origin, control, destination, segments, lineWidth, color) {
+        lineWidth = lineWidth || this._lineWidth;
+        color = color || this._drawColor;
+        cc._DrawNode.prototype.drawQuadBezier.call(this, origin, control, destination, segments, color);
+    },
 
-	drawCubicBezier: function (origin, control1, control2, destination, segments, lineWidth, color) {
-		lineWidth = lineWidth || this._lineWidth;
-		color = color || this._drawColor;
-		cc._DrawNode.prototype.drawCubicBezier.call(this, origin, control1, control2, destination, segments, color);
-	},
+    drawCubicBezier: function (origin, control1, control2, destination, segments, lineWidth, color) {
+        lineWidth = lineWidth || this._lineWidth;
+        color = color || this._drawColor;
+        cc._DrawNode.prototype.drawCubicBezier.call(this, origin, control1, control2, destination, segments, color);
+    },
 
-	drawCatmullRom: function (points, segments, lineWidth, color) {
-		this.drawCardinalSpline(points, 0.5, segments, lineWidth, color);
-	},
+    drawCatmullRom: function (points, segments, lineWidth, color) {
+        this.drawCardinalSpline(points, 0.5, segments, lineWidth, color);
+    },
 
-	drawCardinalSpline: function (config, tension, segments, lineWidth, color) {
-		lineWidth = lineWidth || this._lineWidth;
-		color = color || this._drawColor;
-		if (color.a == null)
-			color.a = 255;
-		var vertices = [], p, lt, deltaT = 1.0 / config.length, m1len = config.length - 1;
+    drawCardinalSpline: function (config, tension, segments, lineWidth, color) {
+        lineWidth = lineWidth || this._lineWidth;
+        color = color || this._drawColor;
+        if (color.a == null)
+            color.a = 255;
+        var vertices = [], p, lt, deltaT = 1.0 / config.length, m1len = config.length - 1;
 
-		for (var i = 0; i < segments + 1; i++) {
-			var dt = i / segments;
+        for (var i = 0; i < segments + 1; i++) {
+            var dt = i / segments;
 
-			// border
-			if (dt == 1) {
-				p = m1len;
-				lt = 1;
-			} else {
-				p = 0 | (dt / deltaT);
-				lt = (dt - deltaT * p) / deltaT;
-			}
+            // border
+            if (dt == 1) {
+                p = m1len;
+                lt = 1;
+            } else {
+                p = 0 | (dt / deltaT);
+                lt = (dt - deltaT * p) / deltaT;
+            }
 
-			// Interpolate
-			var newPos = cc.cardinalSplineAt(
-				config[Math.min(m1len, Math.max(p - 1, 0))],
-				config[Math.min(m1len, Math.max(p + 0, 0))],
-				config[Math.min(m1len, Math.max(p + 1, 0))],
-				config[Math.min(m1len, Math.max(p + 2, 0))],
-				tension, lt);
-			vertices.push(newPos);
-		}
+            // Interpolate
+            var newPos = cc.cardinalSplineAt(
+                config[Math.min(m1len, Math.max(p - 1, 0))],
+                config[Math.min(m1len, Math.max(p + 0, 0))],
+                config[Math.min(m1len, Math.max(p + 1, 0))],
+                config[Math.min(m1len, Math.max(p + 2, 0))],
+                tension, lt);
+            vertices.push(newPos);
+        }
 
-		lineWidth *= 0.5;
-		var drawSeg = cc._DrawNode.prototype.drawSegment;
-		for (var j = 0, len = vertices.length; j < len - 1; j++)
-			drawSeg.call(this, vertices[j], vertices[j + 1], lineWidth, color);
-	},
+        lineWidth *= 0.5;
+        var drawSeg = cc._DrawNode.prototype.drawSegment;
+        for (var j = 0, len = vertices.length; j < len - 1; j++)
+            drawSeg.call(this, vertices[j], vertices[j + 1], lineWidth, color);
+    },
 
-	drawDot:function (pos, radius, color) {
-		color = color || this._drawColor;
-		cc._DrawNode.prototype.drawDot.call(this, pos, radius, color);
-	},
+    drawDot:function (pos, radius, color) {
+        color = color || this._drawColor;
+        cc._DrawNode.prototype.drawDot.call(this, pos, radius, color);
+    },
 
-	drawSegment:function (from, to, radius, color) {
-		color = color || this._drawColor;
-		cc._DrawNode.prototype.drawSegment.call(this, from, to, radius, color);
-	},
+    drawSegment:function (from, to, lineWidth = this._lineWidth, color = this._drawColor) {
+        cc._DrawNode.prototype.drawSegment.call(this, from, to, lineWidth, color);
+    },
 
-	drawPoly:function (verts, fillColor, borderWidth, borderColor) {
-		borderColor = borderColor || this._drawColor;
-		if (fillColor)
-			cc._DrawNode.prototype.drawPoly.call(this, verts, fillColor, borderWidth, borderColor);
-		else {
-			verts.push(verts[0]);
-			var drawSeg = cc._DrawNode.prototype.drawSegment;
-			for (var i = 0, len = verts.length; i < len - 1; i++)
-				drawSeg.call(this, verts[i], verts[i + 1], borderWidth, borderColor);
-		}
-	}
+    drawPoly:function (verts, fillColor, borderWidth, borderColor) {
+        borderColor = borderColor || this._drawColor;
+        if (fillColor)
+            cc._DrawNode.prototype.drawPoly.call(this, verts, fillColor, borderWidth, borderColor);
+        else {
+            verts.push(verts[0]);
+            var drawSeg = cc._DrawNode.prototype.drawSegment;
+            for (var i = 0, len = verts.length; i < len - 1; i++)
+                drawSeg.call(this, verts[i], verts[i + 1], borderWidth, borderColor);
+        }
+    }
 });
 cc.DrawNode.create = function () {
-	return new cc.DrawNode();
+    return new cc.DrawNode();
 };
 
 
@@ -2198,7 +2171,6 @@ var templateSetBlendFunc = function(src, dst) {
     else
         blendf = {src: src, dst: dst};
     this._setBlendFunc(blendf);
-    var b = this.getBlendFunc();
 };
 for (var i = 0, l = protoHasBlend.length; i < l; i++) {
     var proto = protoHasBlend[i];
@@ -2250,8 +2222,8 @@ var easeActions = {
 };
 
 function templateEaseActions(actionTag) {
-    return function(param) {
-        return {tag: actionTag, parameter: param};
+    return function(param, param2, param3, param4) {
+        return {tag: actionTag, param: param, param2: param2, param3: param3, param4: param4};
     }
 }
 
@@ -2260,6 +2232,7 @@ for (var a in easeActions) {
     cc[a] = templateEaseActions(actionTag);
 }
 
+// Action2d
 cc.action = cc.Action.create;
 cc.speed = cc.Speed.create;
 cc.follow = cc.Follow.create;
@@ -2274,7 +2247,7 @@ cc.toggleVisibility = cc.ToggleVisibility.create;
 cc.removeSelf = cc.RemoveSelf.create;
 cc.flipX = cc.FlipX.create;
 cc.flipY = cc.FlipY.create;
-cc.place = cc.Place.create;
+// cc.place = cc.Place.create;
 cc.callFunc = cc.CallFunc.create;
 cc.actionInterval = cc.ActionInterval.create;
 cc.sequence = cc.Sequence.create;
@@ -2283,12 +2256,12 @@ cc.repeatForever = cc.RepeatForever.create;
 cc.spawn = cc.Spawn.create;
 cc.rotateTo = cc.RotateTo.create;
 cc.rotateBy = cc.RotateBy.create;
-cc.moveBy = cc.MoveBy.create;
-cc.moveTo = cc.MoveTo.create;
+//cc.moveBy = cc.MoveBy.create;
+//cc.moveTo = cc.MoveTo.create;
 cc.skewTo = cc.SkewTo.create;
 cc.skewBy = cc.SkewBy.create;
-cc.jumpBy = cc.JumpBy.create;
-cc.jumpTo = cc.JumpTo.create;
+//cc.jumpBy = cc.JumpBy.create;
+//cc.jumpTo = cc.JumpTo.create;
 cc.bezierBy = cc.BezierBy.create;
 cc.bezierTo = cc.BezierTo.create;
 cc.scaleTo = cc.ScaleTo.create;
@@ -2300,11 +2273,149 @@ cc.fadeOut = cc.FadeOut.create;
 cc.tintTo = cc.TintTo.create;
 cc.tintBy = cc.TintBy.create;
 cc.delayTime = cc.DelayTime.create;
-//cc.reverseTime = cc.ReverseTime.create;
+cc.reverseTime = cc.ReverseTime.create;
 cc.animate = cc.Animate.create;
 cc.targetedAction = cc.TargetedAction.create;
 cc.actionTween = cc.ActionTween.create;
 
+cc.Place._create = cc.Place.create;
+cc.place = cc.Place.create = function(posOrX, y){
+    if (undefined === y){
+        return cc.Place._create(posOrX);
+    }else{
+        return cc.Place._create(cc.p(posOrX, y));
+    }
+};
+cc.MoveTo._create = cc.MoveTo.create;
+cc.moveTo = cc.MoveTo.create = function(duration, posOrX, y){
+    if (undefined === y){
+        return cc.MoveTo._create(duration, posOrX);
+    }else{
+        return cc.MoveTo._create(duration, cc.p(posOrX, y));
+    }
+};
+cc.MoveBy._create = cc.MoveBy.create;
+cc.moveBy = cc.MoveBy.create = function(duration, posOrX, y){
+    if (undefined === y){
+        return cc.MoveBy._create(duration, posOrX);
+    }else{
+        return cc.MoveBy._create(duration, cc.p(posOrX, y));
+    }
+};
+cc.JumpTo._create = cc.JumpTo.create;
+cc.jumpTo = cc.JumpTo.create = function(duration, position, y, height, jumps){
+    if (undefined === jumps){
+        jumps = height;
+        height = y;
+        return cc.JumpTo._create(duration, position, height, jumps);
+    }else{
+        return cc.JumpTo._create(duration, cc.p(position, y), height, jumps);
+    }
+};
+cc.JumpBy._create = cc.JumpBy.create;
+cc.jumpBy = cc.JumpBy.create = function(duration, position, y, height, jumps){
+    if (undefined === jumps){
+        jumps = height;
+        height = y;
+        return cc.JumpBy._create(duration, position, height, jumps);
+    }else{
+        return cc.JumpBy._create(duration, cc.p(position, y), height, jumps);
+    }
+};
+
+// Actions3d
+cc.gridAction = cc.GridAction.create;
+cc.grid3DAction = cc.Grid3DAction.create;
+cc.tiledGrid3DAction = cc.TiledGrid3DAction.create;
+cc.stopGrid = cc.StopGrid.create;
+cc.reuseGrid = cc.ReuseGrid.create;
+cc.waves3D = cc.Waves3D.create;
+cc.flipX3D = cc.FlipX3D.create;
+cc.flipY3D = cc.FlipY3D.create;
+cc.lens3D = cc.Lens3D.create;
+cc.ripple3D = cc.Ripple3D.create;
+cc.shaky3D = cc.Shaky3D.create;
+cc.liquid = cc.Liquid.create;
+cc.waves = cc.Waves.create;
+cc.twirl = cc.Twirl.create;
+cc.pageTurn3D = cc.PageTurn3D.create;
+cc.shakyTiles3D = cc.ShakyTiles3D.create;
+cc.shatteredTiles3D = cc.ShatteredTiles3D.create;
+cc.shuffleTiles = cc.ShuffleTiles.create;
+cc.fadeOutTRTiles = cc.FadeOutTRTiles.create;
+cc.fadeOutBLTiles = cc.FadeOutBLTiles.create;
+cc.fadeOutUpTiles = cc.FadeOutUpTiles.create;
+cc.fadeOutDownTiles = cc.FadeOutDownTiles.create;
+cc.turnOffTiles = cc.TurnOffTiles.create;
+cc.wavesTiles3D = cc.WavesTiles3D.create;
+cc.jumpTiles3D = cc.JumpTiles3D.create;
+cc.splitRows = cc.SplitRows.create;
+cc.splitCols = cc.SplitCols.create;
+cc.progressTo = cc.ProgressTo.create;
+cc.progressFromTo = cc.ProgressFromTo.create;
+
+// Speed functions
+cc.Speed.prototype.speed = cc.ActionInterval.prototype.speed = function(speed) {
+//    if (speed < 0) {
+//        cc.warn("cc.ActionInterval#speed : Speed must not be negative");
+//        return;
+//    }
+    var action = this, found = false;
+    while (action.getInnerAction && !found) {
+        if (action instanceof cc.Speed) {
+            found = true;
+        }
+        else {
+            action = action.getInnerAction();
+        }
+    }
+    if (found) {
+        speed = speed * action._getSpeed();
+        action._setSpeed(speed);
+    }
+    else {
+        this._speed(speed);
+    }
+    return this;
+};
+cc.Speed.prototype.setSpeed = cc.ActionInterval.prototype.setSpeed = function(speed) {
+//    if (speed < 0) {
+//        cc.warn("cc.ActionInterval#setSpeed : Speed must not be negative");
+//        return;
+//    }
+    var action = this, found = false;
+    while (action.getInnerAction && !found) {
+        if (action instanceof cc.Speed) {
+            found = true;
+        }
+        else {
+            action = action.getInnerAction();
+        }
+    }
+    if (found) {
+        action._setSpeed(speed);
+    }
+    else {
+        this._speed(speed);
+    }
+};
+cc.Speed.prototype.getSpeed = cc.ActionInterval.prototype.getSpeed = function() {
+    var action = this, found = false;
+    while (action.getInnerAction && !found) {
+        if (action instanceof cc.Speed) {
+            found = true;
+        }
+        else {
+            action = action.getInnerAction();
+        }
+    }
+    if (found) {
+        return action._getSpeed();
+    }
+    else {
+        return 1;
+    }
+};
 
 //
 //AffineTransform API
@@ -2341,7 +2452,7 @@ cc.AffineTransform = function (a, b, c, d, tx, ty) {
  * @return {cc.AffineTransform}
  * Constructor
  */
-cc.AffineTransformMake = function (a, b, c, d, tx, ty) {
+cc.affineTransformMake = function (a, b, c, d, tx, ty) {
     return {a: a, b: b, c: c, d: d, tx: tx, ty: ty};
 };
 
@@ -2353,11 +2464,11 @@ cc.AffineTransformMake = function (a, b, c, d, tx, ty) {
  * @return {cc.Point}
  * Constructor
  */
-cc.PointApplyAffineTransform = function (point, t) {
+cc.pointApplyAffineTransform = function (point, t) {
     return {x: t.a * point.x + t.c * point.y + t.tx, y: t.b * point.x + t.d * point.y + t.ty};
 };
 
-cc._PointApplyAffineTransform = function (x, y, t) {
+cc._pointApplyAffineTransform = function (x, y, t) {
     return {x: t.a * x + t.c * y + t.tx,
         y: t.b * x + t.d * y + t.ty};
 };
@@ -2370,7 +2481,7 @@ cc._PointApplyAffineTransform = function (x, y, t) {
  * @return {cc.Size}
  * Constructor
  */
-cc.SizeApplyAffineTransform = function (size, t) {
+cc.sizeApplyAffineTransform = function (size, t) {
     return {width: t.a * size.width + t.c * size.height, height: t.b * size.width + t.d * size.height};
 };
 
@@ -2380,7 +2491,7 @@ cc.SizeApplyAffineTransform = function (size, t) {
  * @return {cc.AffineTransform}
  * Constructor
  */
-cc.AffineTransformMakeIdentity = function () {
+cc.affineTransformMakeIdentity = function () {
     return {a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0};
 };
 
@@ -2390,7 +2501,7 @@ cc.AffineTransformMakeIdentity = function () {
  * @return {cc.AffineTransform}
  * Constructor
  */
-cc.AffineTransformIdentity = function () {
+cc.affineTransformIdentity = function () {
     return {a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0};
 };
 
@@ -2402,16 +2513,16 @@ cc.AffineTransformIdentity = function () {
  * @return {cc.Rect}
  * Constructor
  */
-cc.RectApplyAffineTransform = function (rect, anAffineTransform) {
+cc.rectApplyAffineTransform = function (rect, anAffineTransform) {
     var top = cc.rectGetMinY(rect);
     var left = cc.rectGetMinX(rect);
     var right = cc.rectGetMaxX(rect);
     var bottom = cc.rectGetMaxY(rect);
 
-    var topLeft = cc._PointApplyAffineTransform(left, top, anAffineTransform);
-    var topRight = cc._PointApplyAffineTransform(right, top, anAffineTransform);
-    var bottomLeft = cc._PointApplyAffineTransform(left, bottom, anAffineTransform);
-    var bottomRight = cc._PointApplyAffineTransform(right, bottom, anAffineTransform);
+    var topLeft = cc._pointApplyAffineTransform(left, top, anAffineTransform);
+    var topRight = cc._pointApplyAffineTransform(right, top, anAffineTransform);
+    var bottomLeft = cc._pointApplyAffineTransform(left, bottom, anAffineTransform);
+    var bottomRight = cc._pointApplyAffineTransform(right, bottom, anAffineTransform);
 
     var minX = Math.min(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
     var maxX = Math.max(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
@@ -2421,16 +2532,16 @@ cc.RectApplyAffineTransform = function (rect, anAffineTransform) {
     return cc.rect(minX, minY, (maxX - minX), (maxY - minY));
 };
 
-cc._RectApplyAffineTransformIn = function(rect, anAffineTransform){
+cc._rectApplyAffineTransformIn = function(rect, anAffineTransform){
     var top = cc.rectGetMinY(rect);
     var left = cc.rectGetMinX(rect);
     var right = cc.rectGetMaxX(rect);
     var bottom = cc.rectGetMaxY(rect);
 
-    var topLeft = cc._PointApplyAffineTransform(left, top, anAffineTransform);
-    var topRight = cc._PointApplyAffineTransform(right, top, anAffineTransform);
-    var bottomLeft = cc._PointApplyAffineTransform(left, bottom, anAffineTransform);
-    var bottomRight = cc._PointApplyAffineTransform(right, bottom, anAffineTransform);
+    var topLeft = cc._pointApplyAffineTransform(left, top, anAffineTransform);
+    var topRight = cc._pointApplyAffineTransform(right, top, anAffineTransform);
+    var bottomLeft = cc._pointApplyAffineTransform(left, bottom, anAffineTransform);
+    var bottomRight = cc._pointApplyAffineTransform(right, bottom, anAffineTransform);
 
     var minX = Math.min(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
     var maxX = Math.max(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
@@ -2453,7 +2564,7 @@ cc._RectApplyAffineTransformIn = function(rect, anAffineTransform){
  * @return {cc.AffineTransform}
  * Constructor
  */
-cc.AffineTransformTranslate = function (t, tx, ty) {
+cc.affineTransformTranslate = function (t, tx, ty) {
     return {
         a: t.a,
         b: t.b,
@@ -2473,7 +2584,7 @@ cc.AffineTransformTranslate = function (t, tx, ty) {
  * @return {cc.AffineTransform}
  * Constructor
  */
-cc.AffineTransformScale = function (t, sx, sy) {
+cc.affineTransformScale = function (t, sx, sy) {
     return {a: t.a * sx, b: t.b * sx, c: t.c * sy, d: t.d * sy, tx: t.tx, ty: t.ty};
 };
 
@@ -2485,7 +2596,7 @@ cc.AffineTransformScale = function (t, sx, sy) {
  * @return {cc.AffineTransform}
  * Constructor
  */
-cc.AffineTransformRotate = function (aTransform, anAngle) {
+cc.affineTransformRotate = function (aTransform, anAngle) {
     var fSin = Math.sin(anAngle);
     var fCos = Math.cos(anAngle);
 
@@ -2507,7 +2618,7 @@ cc.AffineTransformRotate = function (aTransform, anAngle) {
  * @return {cc.AffineTransform}
  * Constructor
  */
-cc.AffineTransformConcat = function (t1, t2) {
+cc.affineTransformConcat = function (t1, t2) {
     return {a: t1.a * t2.a + t1.b * t2.c,                          //a
         b: t1.a * t2.b + t1.b * t2.d,                               //b
         c: t1.c * t2.a + t1.d * t2.c,                               //c
@@ -2525,7 +2636,7 @@ cc.AffineTransformConcat = function (t1, t2) {
  * @return {Boolean}
  * Constructor
  */
-cc.AffineTransformEqualToTransform = function (t1, t2) {
+cc.affineTransformEqualToTransform = function (t1, t2) {
     return ((t1.a === t2.a) && (t1.b === t2.b) && (t1.c === t2.c) && (t1.d === t2.d) && (t1.tx === t2.tx) && (t1.ty === t2.ty));
 };
 
@@ -2537,7 +2648,7 @@ cc.AffineTransformEqualToTransform = function (t1, t2) {
  * @return {cc.AffineTransform}
  * Constructor
  */
-cc.AffineTransformInvert = function (t) {
+cc.affineTransformInvert = function (t) {
     var determinant = 1 / (t.a * t.d - t.b * t.c);
     return {a: determinant * t.d, b: -determinant * t.b, c: -determinant * t.c, d: determinant * t.a,
         tx: determinant * (t.c * t.ty - t.d * t.tx), ty: determinant * (t.b * t.tx - t.a * t.ty)};
@@ -2555,15 +2666,23 @@ cc.Node.prototype.getUserData = function () {
     return this.userData;
 };
 
+//for compatibility with html5
+cc.Node.prototype._setNormalizedPosition = cc.Node.prototype.setNormalizedPosition;
+cc.Node.prototype.setNormalizedPosition = function(pos, y){
+    if(y === undefined)
+        cc.Node.prototype._setNormalizedPosition.call(this, pos);
+    else
+        cc.Node.prototype._setNormalizedPosition.call(this, cc.p(pos, y));
+};
+
 /** returns a "world" axis aligned bounding box of the node. <br/>
  * @return {cc.Rect}
  */
 cc.Node.prototype.getBoundingBoxToWorld = function () {
     var contentSize = this.getContentSize();
     var rect = cc.rect(0, 0, contentSize.width, contentSize.height);
-    var matrix = this.getNodeToWorldTransform();
-    var trans = cc.AffineTransformMake(matrix[0], matrix[1], matrix[4], matrix[5], matrix[12], matrix[13]);  
-    rect = cc.RectApplyAffineTransform(rect, trans);
+    var trans = this.getNodeToWorldTransform();
+    rect = cc.rectApplyAffineTransform(rect, trans);
 
     //query child's BoundingBox
     if (!this.getChildren())
@@ -2584,10 +2703,9 @@ cc.Node.prototype.getBoundingBoxToWorld = function () {
 cc.Node.prototype._getBoundingBoxToCurrentNode = function (parentTransform) {
     var contentSize = this.getContentSize();
     var rect = cc.rect(0, 0, contentSize.width, contentSize.height);
-    var matrix = this.getNodeToParentTransform();
-    var _trans = cc.AffineTransformMake(matrix[0], matrix[1], matrix[4], matrix[5], matrix[12], matrix[13]); 
-    var trans = (parentTransform == null) ? _trans : cc.AffineTransformConcat(_trans, parentTransform);
-    rect = cc.RectApplyAffineTransform(rect, trans);
+    var _trans = this.getNodeToParentTransform();
+    var trans = (parentTransform == null) ? _trans : cc.affineTransformConcat(_trans, parentTransform);
+    rect = cc.rectApplyAffineTransform(rect, trans);
 
     //query child's BoundingBox
     if (!this.getChildren())
@@ -2604,3 +2722,154 @@ cc.Node.prototype._getBoundingBoxToCurrentNode = function (parentTransform) {
     }
     return rect;
 };
+
+//
+// cc.Layer bake/unbake/isBaked
+//
+cc.Layer.prototype.bake = cc.Layer.prototype.unbake = function() {};
+cc.Layer.prototype.isBaked = function() {return false;};
+
+
+//
+// RenderTexture beginWithClear
+//
+cc.RenderTexture.prototype._beginWithClear = cc.RenderTexture.prototype.beginWithClear;
+cc.RenderTexture.prototype.beginWithClear = function(r, g, b, a, depthValue, stencilValue) {
+    arguments[0] /= 255;
+    arguments[1] /= 255;
+    arguments[2] /= 255;
+    arguments[3] /= 255;
+    this._beginWithClear.apply(this, arguments);
+};
+
+
+//
+// Texture2D setTexParameters
+//
+cc.Texture2D.prototype._setTexParameters = cc.Texture2D.prototype.setTexParameters;
+cc.Texture2D.prototype.setTexParameters = function (texParams, magFilter, wrapS, wrapT) {
+    var minFilter;
+    if (magFilter === undefined) {
+        minFilter = texParams.minFilter;
+        magFilter = texParams.magFilter;
+        wrapS = texParams.wrapS;
+        wrapT = texParams.wrapT;
+    }
+    else minFilter = texParams;
+
+    this._setTexParameters(minFilter, magFilter, wrapS, wrapT);
+};
+
+cc.Texture2D.prototype.handleLoadedTexture = function (premultipled) {};
+
+
+//
+// MenuItemImage support sprite frame name as paramter
+//
+var _p = cc.MenuItemImage.prototype;
+_p._setNormalSpriteFrame = _p.setNormalSpriteFrame;
+_p._setSelectedSpriteFrame = _p.setSelectedSpriteFrame;
+_p._setDisabledSpriteFrame = _p.setDisabledSpriteFrame;
+_p.setNormalSpriteFrame = function(frame) {
+    if (frame[0] == "#") 
+        frame = cc.spriteFrameCache.getSpriteFrame(frame.substr(1));
+    this._setNormalSpriteFrame(frame);
+}
+_p.setSelectedSpriteFrame = function(frame) {
+    if (frame[0] == "#") 
+        frame = cc.spriteFrameCache.getSpriteFrame(frame.substr(1));
+    this._setSelectedSpriteFrame(frame);
+}
+_p.setDisabledSpriteFrame = function(frame) {
+    if (frame[0] == "#") 
+        frame = cc.spriteFrameCache.getSpriteFrame(frame.substr(1));
+    this._setDisabledSpriteFrame(frame);
+}
+
+cc.MenuItemToggle.prototype.selectedItem = cc.MenuItemToggle.prototype.getSelectedItem;
+
+
+//
+// LabelTTF setDimensions support two parameters
+//
+cc.LabelTTF.prototype._setDimensions = cc.LabelTTF.prototype.setDimensions;
+cc.LabelTTF.prototype.setDimensions = function (dim, height) {
+    if (!isNaN(height)) {
+        dim = {width: dim, height: height};
+    }
+    this._setDimensions(dim);
+};
+
+
+//
+// Label adaptation to LabelTTF/LabelBMFont/LabelAtlas
+//
+_p = cc.Label.prototype;
+_p.enableStroke = _p.enableOutline;
+_p.setBoundingWidth = _p.setWidth;
+_p.setBoundingHeight = _p.setHeight;
+
+
+//
+// cc.Scheduler scheduleCallbackForTarget
+//
+_p = cc.Scheduler.prototype;
+_p.unscheduleUpdateForTarget = _p.unscheduleUpdate;
+_p.unscheduleAllCallbacksForTarget = _p.unscheduleAllForTarget;
+
+
+//
+// cc.BlendFunc
+//
+/**
+ * Blend Function used for textures
+ * @Class cc.BlendFunc
+ * @Constructor
+ * @param {Number} src1 source blend function
+ * @param {Number} dst1 destination blend function
+ */
+cc.BlendFunc = function (src1, dst1) {
+    this.src = src1;
+    this.dst = dst1;
+};
+
+cc.BlendFunc._disable = function(){
+    return new cc.BlendFunc(cc.ONE, cc.ZERO);
+};
+cc.BlendFunc._alphaPremultiplied = function(){
+    return new cc.BlendFunc(cc.ONE, cc.ONE_MINUS_SRC_ALPHA);
+};
+cc.BlendFunc._alphaNonPremultiplied = function(){
+    return new cc.BlendFunc(cc.SRC_ALPHA, cc.ONE_MINUS_SRC_ALPHA);
+};
+cc.BlendFunc._additive = function(){
+    return new cc.BlendFunc(cc.SRC_ALPHA, cc.ONE);
+};
+
+/** @expose */
+cc.BlendFunc.DISABLE;
+cc.defineGetterSetter(cc.BlendFunc, "DISABLE", cc.BlendFunc._disable);
+/** @expose */
+cc.BlendFunc.ALPHA_PREMULTIPLIED;
+cc.defineGetterSetter(cc.BlendFunc, "ALPHA_PREMULTIPLIED", cc.BlendFunc._alphaPremultiplied);
+/** @expose */
+cc.BlendFunc.ALPHA_NON_PREMULTIPLIED;
+cc.defineGetterSetter(cc.BlendFunc, "ALPHA_NON_PREMULTIPLIED", cc.BlendFunc._alphaNonPremultiplied);
+/** @expose */
+cc.BlendFunc.ADDITIVE;
+cc.defineGetterSetter(cc.BlendFunc, "ADDITIVE", cc.BlendFunc._additive);
+
+
+//
+// 3D module rename to jsb namespace
+//
+jsb.BaseLight = cc.BaseLight;
+delete cc.BaseLight;
+jsb.DirectionLight = cc.DirectionLight;
+delete cc.DirectionLight;
+jsb.PointLight = cc.PointLight;
+delete cc.PointLight;
+jsb.SpotLight = cc.SpotLight;
+delete cc.SpotLight;
+jsb.AmbientLight = cc.AmbientLight;
+delete cc.AmbientLight;

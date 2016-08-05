@@ -79,22 +79,27 @@ var BakeLayerTest1 = BakeLayerBaseTest.extend({
         this._super();
 
         var winSize = cc.winSize;
-        var bakeItem = cc.MenuItemFont.create("bake", this.onBake, this);
-        var unbakeItem = cc.MenuItemFont.create("unbake", this.onUnbake, this);
-        var runActionItem = cc.MenuItemFont.create("run action", this.onRunAction, this);
-        var menu = cc.Menu.create(bakeItem, unbakeItem, runActionItem);
+        var bakeItem = new cc.MenuItemFont("bake", this.onBake, this);
+        var unbakeItem = new cc.MenuItemFont("unbake", this.onUnbake, this);
+        var runActionItem = new cc.MenuItemFont("run action", this.onRunAction, this);
+        var menu = new cc.Menu(bakeItem, unbakeItem, runActionItem);
 
         menu.alignItemsVertically();
         menu.x = winSize.width - 70;
         menu.y = winSize.height - 120;
         this.addChild(menu, 10);
 
+        var rootLayer = new cc.Layer();
+        rootLayer.setPosition(20,20);
+        this.addChild(rootLayer);
+
         var bakeLayer = new cc.Layer();
         bakeLayer.bake();
-        this.addChild(bakeLayer);
+        bakeLayer.setRotation(30);
+        rootLayer.addChild(bakeLayer);
 
         for(var i = 0; i < 9; i++){
-            var sprite1 = cc.Sprite.create(s_pathGrossini);
+            var sprite1 = new cc.Sprite(s_pathGrossini);
             if (i % 2 === 0) {
                 sprite1.setPosition(90 + i * 80, winSize.height / 2 - 50);
             } else {
@@ -106,7 +111,7 @@ var BakeLayerTest1 = BakeLayerBaseTest.extend({
             bakeLayer.addChild(sprite1);
         }
         this._bakeLayer = bakeLayer;
-
+        bakeLayer.runAction(cc.sequence(cc.moveBy(2, cc.p(100,100)), cc.moveBy(2, cc.p(-100,-100))));
     },
 
     onBake: function(){
@@ -134,29 +139,34 @@ var BakeLayerColorTest = BakeLayerBaseTest.extend({
         this._super();
 
         var winSize = cc.winSize;
-        var bakeItem = cc.MenuItemFont.create("bake", this.onBake, this);
-        var unbakeItem = cc.MenuItemFont.create("unbake", this.onUnbake, this);
-        var runActionItem = cc.MenuItemFont.create("run action", this.onRunAction, this);
-        var menu = cc.Menu.create(bakeItem, unbakeItem, runActionItem);
+        var bakeItem = new cc.MenuItemFont("bake", this.onBake, this);
+        var unbakeItem = new cc.MenuItemFont("unbake", this.onUnbake, this);
+        var runActionItem = new cc.MenuItemFont("run action", this.onRunAction, this);
+        var menu = new cc.Menu(bakeItem, unbakeItem, runActionItem);
 
         menu.alignItemsVertically();
         menu.x = winSize.width - 70;
         menu.y = winSize.height - 120;
         this.addChild(menu, 10);
 
+        var rootLayer = new cc.Layer();
+        rootLayer.setPosition(20,20);
+        this.addChild(rootLayer);
+
         //var bakeLayer = cc.LayerColor.create(cc.color(128,0, 128, 128), 700, 300);     //test for LayerColor
         //bakeLayer.setPosition(60, 80);
 
-        var bakeLayer = cc.LayerGradient.create(cc.color(128,0, 128, 255), cc.color(0, 0, 128, 255));
+        var bakeLayer = new cc.LayerGradient(cc.color(128,0, 128, 255), cc.color(0, 0, 128, 255));
         bakeLayer.setPosition(60, 80);
         bakeLayer.setContentSize(700, 300);
+        bakeLayer.setRotation(30);
 
         //bakeLayer.setPosition(winSize.width /2, winSize.height /2);         //test for ignoreAnchorPointForPosition
         //bakeLayer.ignoreAnchorPointForPosition(false);
-        this.addChild(bakeLayer);
+        rootLayer.addChild(bakeLayer);
 
         for(var i = 0; i < 9; i++){
-            var sprite1 = cc.Sprite.create(s_pathGrossini);
+            var sprite1 = new cc.Sprite(s_pathGrossini);
             if (i % 2 === 0) {
                 sprite1.setPosition(20 + i * 80, 100);
             } else {
@@ -170,6 +180,7 @@ var BakeLayerColorTest = BakeLayerBaseTest.extend({
 
         this._bakeLayer = bakeLayer;
         bakeLayer.bake();
+        bakeLayer.runAction(cc.sequence(cc.moveBy(2, cc.p(100,100)), cc.moveBy(2, cc.p(-100,-100))));
     },
 
     onBake: function(){

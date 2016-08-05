@@ -207,6 +207,16 @@ RelativeLayoutParameter : function (
 ccui.Widget = {
 
 /**
+ * @method setLayoutComponentEnabled
+ * @param {bool} arg0
+ */
+setLayoutComponentEnabled : function (
+bool 
+)
+{
+},
+
+/**
  * @method setSizePercent
  * @param {vec2_object} arg0
  */
@@ -227,13 +237,13 @@ getCustomSize : function (
 },
 
 /**
- * @method setFlippedY
- * @param {bool} arg0
+ * @method getLeftBoundary
+ * @return {float}
  */
-setFlippedY : function (
-bool 
+getLeftBoundary : function (
 )
 {
+    return 0;
 },
 
 /**
@@ -247,13 +257,13 @@ bool
 },
 
 /**
- * @method init
- * @return {bool}
+ * @method setCallbackName
+ * @param {String} arg0
  */
-init : function (
+setCallbackName : function (
+str 
 )
 {
-    return false;
 },
 
 /**
@@ -264,6 +274,26 @@ getVirtualRenderer : function (
 )
 {
     return cc.Node;
+},
+
+/**
+ * @method setPropagateTouchEvents
+ * @param {bool} arg0
+ */
+setPropagateTouchEvents : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isUnifySizeEnabled
+ * @return {bool}
+ */
+isUnifySizeEnabled : function (
+)
+{
+    return false;
 },
 
 /**
@@ -282,6 +312,16 @@ getSizePercent : function (
  */
 setPositionPercent : function (
 vec2 
+)
+{
+},
+
+/**
+ * @method setSwallowTouches
+ * @param {bool} arg0
+ */
+setSwallowTouches : function (
+bool 
 )
 {
 },
@@ -357,17 +397,13 @@ getLayoutParameter : function (
 },
 
 /**
- * @method findNextFocusedWidget
- * @param {ccui.Widget::FocusDirection} arg0
- * @param {ccui.Widget} arg1
- * @return {ccui.Widget}
+ * @method addCCSEventListener
+ * @param {function} arg0
  */
-findNextFocusedWidget : function (
-focusdirection, 
-widget 
+addCCSEventListener : function (
+func 
 )
 {
-    return ccui.Widget;
 },
 
 /**
@@ -398,6 +434,20 @@ ignoreContentAdaptWithSize : function (
 bool 
 )
 {
+},
+
+/**
+ * @method findNextFocusedWidget
+ * @param {ccui.Widget::FocusDirection} arg0
+ * @param {ccui.Widget} arg1
+ * @return {ccui.Widget}
+ */
+findNextFocusedWidget : function (
+focusdirection, 
+widget 
+)
+{
+    return ccui.Widget;
 },
 
 /**
@@ -441,6 +491,16 @@ isTouchEnabled : function (
 },
 
 /**
+ * @method getCallbackName
+ * @return {String}
+ */
+getCallbackName : function (
+)
+{
+    return ;
+},
+
+/**
  * @method getActionTag
  * @return {int}
  */
@@ -458,6 +518,16 @@ getWorldPosition : function (
 )
 {
     return cc.Vec2;
+},
+
+/**
+ * @method isFocusEnabled
+ * @return {bool}
+ */
+isFocusEnabled : function (
+)
+{
+    return false;
 },
 
 /**
@@ -491,13 +561,23 @@ bool
 },
 
 /**
- * @method getLeftBoundary
- * @return {float}
+ * @method setFlippedY
+ * @param {bool} arg0
  */
-getLeftBoundary : function (
+setFlippedY : function (
+bool 
 )
 {
-    return 0;
+},
+
+/**
+ * @method init
+ * @return {bool}
+ */
+init : function (
+)
+{
+    return false;
 },
 
 /**
@@ -581,6 +661,38 @@ isBright : function (
 },
 
 /**
+ * @method dispatchFocusEvent
+ * @param {ccui.Widget} arg0
+ * @param {ccui.Widget} arg1
+ */
+dispatchFocusEvent : function (
+widget, 
+widget 
+)
+{
+},
+
+/**
+ * @method setUnifySizeEnabled
+ * @param {bool} arg0
+ */
+setUnifySizeEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isPropagateTouchEvents
+ * @return {bool}
+ */
+isPropagateTouchEvents : function (
+)
+{
+    return false;
+},
+
+/**
  * @method getCurrentFocusedWidget
  * @return {ccui.Widget}
  */
@@ -588,6 +700,28 @@ getCurrentFocusedWidget : function (
 )
 {
     return ccui.Widget;
+},
+
+/**
+ * @method hitTest
+ * @param {vec2_object} arg0
+ * @return {bool}
+ */
+hitTest : function (
+vec2 
+)
+{
+    return false;
+},
+
+/**
+ * @method isLayoutComponentEnabled
+ * @return {bool}
+ */
+isLayoutComponentEnabled : function (
+)
+{
+    return false;
 },
 
 /**
@@ -641,17 +775,13 @@ getSizeType : function (
 },
 
 /**
- * @method interceptTouchEvent
- * @param {ccui.Widget::TouchEventType} arg0
- * @param {ccui.Widget} arg1
- * @param {cc.Touch} arg2
+ * @method getCallbackType
+ * @return {String}
  */
-interceptTouchEvent : function (
-toucheventtype, 
-widget, 
-touch 
+getCallbackType : function (
 )
 {
+    return ;
 },
 
 /**
@@ -675,15 +805,27 @@ getPositionPercent : function (
 },
 
 /**
- * @method hitTest
- * @param {vec2_object} arg0
- * @return {bool}
+ * @method propagateTouchEvent
+ * @param {ccui.Widget::TouchEventType} arg0
+ * @param {ccui.Widget} arg1
+ * @param {cc.Touch} arg2
  */
-hitTest : function (
-vec2 
+propagateTouchEvent : function (
+toucheventtype, 
+widget, 
+touch 
 )
 {
-    return false;
+},
+
+/**
+ * @method addClickEventListener
+ * @param {function} arg0
+ */
+addClickEventListener : function (
+func 
+)
+{
 },
 
 /**
@@ -729,13 +871,15 @@ sizetype
 },
 
 /**
- * @method dispatchFocusEvent
- * @param {ccui.Widget} arg0
+ * @method interceptTouchEvent
+ * @param {ccui.Widget::TouchEventType} arg0
  * @param {ccui.Widget} arg1
+ * @param {cc.Touch} arg2
  */
-dispatchFocusEvent : function (
+interceptTouchEvent : function (
+toucheventtype, 
 widget, 
-widget 
+touch 
 )
 {
 },
@@ -751,10 +895,20 @@ bool
 },
 
 /**
- * @method isFocusEnabled
+ * @method setCallbackType
+ * @param {String} arg0
+ */
+setCallbackType : function (
+str 
+)
+{
+},
+
+/**
+ * @method isSwallowTouches
  * @return {bool}
  */
-isFocusEnabled : function (
+isSwallowTouches : function (
 )
 {
     return false;
@@ -1067,6 +1221,14 @@ getBackGroundImageTextureSize : function (
 },
 
 /**
+ * @method forceDoLayout
+ */
+forceDoLayout : function (
+)
+{
+},
+
+/**
  * @method getLayoutType
  * @return {ccui.Layout::Type}
  */
@@ -1153,6 +1315,16 @@ Layout : function (
 ccui.Button = {
 
 /**
+ * @method getNormalTextureSize
+ * @return {size_object}
+ */
+getNormalTextureSize : function (
+)
+{
+    return cc.Size;
+},
+
+/**
  * @method getTitleText
  * @return {String}
  */
@@ -1180,6 +1352,26 @@ setScale9Enabled : function (
 bool 
 )
 {
+},
+
+/**
+ * @method getTitleRenderer
+ * @return {cc.Label}
+ */
+getTitleRenderer : function (
+)
+{
+    return cc.Label;
+},
+
+/**
+ * @method getZoomScale
+ * @return {float}
+ */
+getZoomScale : function (
+)
+{
+    return 0;
 },
 
 /**
@@ -1403,6 +1595,16 @@ bool
 },
 
 /**
+ * @method setZoomScale
+ * @param {float} arg0
+ */
+setZoomScale : function (
+float 
+)
+{
+},
+
+/**
  * @method create
 * @param {String} str
 * @param {String} str
@@ -1447,16 +1649,6 @@ Button : function (
 ccui.CheckBox = {
 
 /**
- * @method getSelectedState
- * @return {bool}
- */
-getSelectedState : function (
-)
-{
-    return false;
-},
-
-/**
  * @method loadTextureBackGroundSelected
  * @param {String} arg0
  * @param {ccui.Widget::TextureResType} arg1
@@ -1481,6 +1673,16 @@ texturerestype
 },
 
 /**
+ * @method setSelected
+ * @param {bool} arg0
+ */
+setSelected : function (
+bool 
+)
+{
+},
+
+/**
  * @method loadTextureFrontCross
  * @param {String} arg0
  * @param {ccui.Widget::TextureResType} arg1
@@ -1490,6 +1692,16 @@ str,
 texturerestype 
 )
 {
+},
+
+/**
+ * @method isSelected
+ * @return {bool}
+ */
+isSelected : function (
+)
+{
+    return false;
 },
 
 /**
@@ -1535,6 +1747,16 @@ texturerestype
 },
 
 /**
+ * @method getZoomScale
+ * @return {float}
+ */
+getZoomScale : function (
+)
+{
+    return 0;
+},
+
+/**
  * @method loadTextureBackGround
  * @param {String} arg0
  * @param {ccui.Widget::TextureResType} arg1
@@ -1547,11 +1769,11 @@ texturerestype
 },
 
 /**
- * @method setSelectedState
- * @param {bool} arg0
+ * @method setZoomScale
+ * @param {float} arg0
  */
-setSelectedState : function (
-bool 
+setZoomScale : function (
+float 
 )
 {
 },
@@ -1570,13 +1792,13 @@ texturerestype
 
 /**
  * @method create
-* @param {String} str
-* @param {String} str
-* @param {String} str
+* @param {String|String} str
+* @param {String|String} str
+* @param {String|ccui.Widget::TextureResType} str
 * @param {String} str
 * @param {String} str
 * @param {ccui.Widget::TextureResType} texturerestype
-* @return {ccui.CheckBox|ccui.CheckBox}
+* @return {ccui.CheckBox|ccui.CheckBox|ccui.CheckBox}
 */
 create : function(
 str,
@@ -1762,20 +1984,22 @@ getString : function (
 
 /**
  * @method disableEffect
- */
-disableEffect : function (
+* @param {cc.LabelEffect} labeleffect
+*/
+disableEffect : function(
+labeleffect 
 )
 {
 },
 
 /**
- * @method getTextAreaSize
- * @return {size_object}
+ * @method getTextColor
+ * @return {color4b_object}
  */
-getTextAreaSize : function (
+getTextColor : function (
 )
 {
-    return cc.Size;
+    return cc.Color4B;
 },
 
 /**
@@ -1875,6 +2099,16 @@ getStringLength : function (
 },
 
 /**
+ * @method getAutoRenderSize
+ * @return {size_object}
+ */
+getAutoRenderSize : function (
+)
+{
+    return cc.Size;
+},
+
+/**
  * @method enableOutline
  * @param {color4b_object} arg0
  * @param {int} arg1
@@ -1917,6 +2151,16 @@ int
 },
 
 /**
+ * @method setTextColor
+ * @param {color4b_object} arg0
+ */
+setTextColor : function (
+color4b 
+)
+{
+},
+
+/**
  * @method enableGlow
  * @param {color4b_object} arg0
  */
@@ -1934,6 +2178,16 @@ getTextVerticalAlignment : function (
 )
 {
     return 0;
+},
+
+/**
+ * @method getTextAreaSize
+ * @return {size_object}
+ */
+getTextAreaSize : function (
+)
+{
+    return cc.Size;
 },
 
 /**
@@ -2184,12 +2438,14 @@ getPercent : function (
 
 /**
  * @method create
-* @param {String} str
+* @param {String|String} str
+* @param {float|ccui.Widget::TextureResType} float
 * @param {float} float
-* @return {ccui.LoadingBar|ccui.LoadingBar}
+* @return {ccui.LoadingBar|ccui.LoadingBar|ccui.LoadingBar}
 */
 create : function(
 str,
+texturerestype,
 float 
 )
 {
@@ -2905,6 +3161,16 @@ bool
 },
 
 /**
+ * @method setZoomScale
+ * @param {float} arg0
+ */
+setZoomScale : function (
+float 
+)
+{
+},
+
+/**
  * @method setCapInsets
  * @param {rect_object} arg0
  */
@@ -2912,6 +3178,16 @@ setCapInsets : function (
 rect 
 )
 {
+},
+
+/**
+ * @method getZoomScale
+ * @return {float}
+ */
+getZoomScale : function (
+)
+{
+    return 0;
 },
 
 /**
@@ -2958,9 +3234,15 @@ getPercent : function (
 
 /**
  * @method create
- * @return {ccui.Slider}
- */
-create : function (
+* @param {String} str
+* @param {String} str
+* @param {ccui.Widget::TextureResType} texturerestype
+* @return {ccui.Slider|ccui.Slider}
+*/
+create : function(
+str,
+str,
+texturerestype 
 )
 {
     return ccui.Slider;
@@ -2981,6 +3263,300 @@ createInstance : function (
  * @constructor
  */
 Slider : function (
+)
+{
+},
+
+};
+
+/**
+ * @class UICCTextField
+ */
+ccui.UICCTextField = {
+
+/**
+ * @method onTextFieldAttachWithIME
+ * @param {cc.TextFieldTTF} arg0
+ * @return {bool}
+ */
+onTextFieldAttachWithIME : function (
+textfieldttf 
+)
+{
+    return false;
+},
+
+/**
+ * @method setPasswordText
+ * @param {String} arg0
+ */
+setPasswordText : function (
+str 
+)
+{
+},
+
+/**
+ * @method setAttachWithIME
+ * @param {bool} arg0
+ */
+setAttachWithIME : function (
+bool 
+)
+{
+},
+
+/**
+ * @method getDeleteBackward
+ * @return {bool}
+ */
+getDeleteBackward : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getAttachWithIME
+ * @return {bool}
+ */
+getAttachWithIME : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method onTextFieldDeleteBackward
+ * @param {cc.TextFieldTTF} arg0
+ * @param {char} arg1
+ * @param {unsigned long} arg2
+ * @return {bool}
+ */
+onTextFieldDeleteBackward : function (
+textfieldttf, 
+char, 
+long 
+)
+{
+    return false;
+},
+
+/**
+ * @method getInsertText
+ * @return {bool}
+ */
+getInsertText : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method deleteBackward
+ */
+deleteBackward : function (
+)
+{
+},
+
+/**
+ * @method setInsertText
+ * @param {bool} arg0
+ */
+setInsertText : function (
+bool 
+)
+{
+},
+
+/**
+ * @method getDetachWithIME
+ * @return {bool}
+ */
+getDetachWithIME : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getCharCount
+ * @return {int}
+ */
+getCharCount : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method closeIME
+ */
+closeIME : function (
+)
+{
+},
+
+/**
+ * @method setPasswordEnabled
+ * @param {bool} arg0
+ */
+setPasswordEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setMaxLengthEnabled
+ * @param {bool} arg0
+ */
+setMaxLengthEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isPasswordEnabled
+ * @return {bool}
+ */
+isPasswordEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method insertText
+ * @param {char} arg0
+ * @param {unsigned long} arg1
+ */
+insertText : function (
+char, 
+long 
+)
+{
+},
+
+/**
+ * @method setPasswordStyleText
+ * @param {String} arg0
+ */
+setPasswordStyleText : function (
+str 
+)
+{
+},
+
+/**
+ * @method onTextFieldInsertText
+ * @param {cc.TextFieldTTF} arg0
+ * @param {char} arg1
+ * @param {unsigned long} arg2
+ * @return {bool}
+ */
+onTextFieldInsertText : function (
+textfieldttf, 
+char, 
+long 
+)
+{
+    return false;
+},
+
+/**
+ * @method onTextFieldDetachWithIME
+ * @param {cc.TextFieldTTF} arg0
+ * @return {bool}
+ */
+onTextFieldDetachWithIME : function (
+textfieldttf 
+)
+{
+    return false;
+},
+
+/**
+ * @method getMaxLength
+ * @return {int}
+ */
+getMaxLength : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method isMaxLengthEnabled
+ * @return {bool}
+ */
+isMaxLengthEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method openIME
+ */
+openIME : function (
+)
+{
+},
+
+/**
+ * @method setDetachWithIME
+ * @param {bool} arg0
+ */
+setDetachWithIME : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setMaxLength
+ * @param {int} arg0
+ */
+setMaxLength : function (
+int 
+)
+{
+},
+
+/**
+ * @method setDeleteBackward
+ * @param {bool} arg0
+ */
+setDeleteBackward : function (
+bool 
+)
+{
+},
+
+/**
+ * @method create
+ * @param {String} arg0
+ * @param {String} arg1
+ * @param {float} arg2
+ * @return {ccui.UICCTextField}
+ */
+create : function (
+str, 
+str, 
+float 
+)
+{
+    return ccui.UICCTextField;
+},
+
+/**
+ * @method UICCTextField
+ * @constructor
+ */
+UICCTextField : function (
 )
 {
 },
@@ -3013,13 +3589,23 @@ getFontSize : function (
 },
 
 /**
- * @method getStringValue
+ * @method getString
  * @return {String}
  */
-getStringValue : function (
+getString : function (
 )
 {
     return ;
+},
+
+/**
+ * @method setPasswordStyleText
+ * @param {char} arg0
+ */
+setPasswordStyleText : function (
+char 
+)
+{
 },
 
 /**
@@ -3078,6 +3664,16 @@ getInsertText : function (
  */
 setInsertText : function (
 bool 
+)
+{
+},
+
+/**
+ * @method setString
+ * @param {String} arg0
+ */
+setString : function (
+str 
 )
 {
 },
@@ -3149,6 +3745,16 @@ getStringLength : function (
 },
 
 /**
+ * @method getAutoRenderSize
+ * @return {size_object}
+ */
+getAutoRenderSize : function (
+)
+{
+    return cc.Size;
+},
+
+/**
  * @method setPasswordEnabled
  * @param {bool} arg0
  */
@@ -3156,6 +3762,16 @@ setPasswordEnabled : function (
 bool 
 )
 {
+},
+
+/**
+ * @method getPlaceHolderColor
+ * @return {color4b_object}
+ */
+getPlaceHolderColor : function (
+)
+{
+    return cc.Color4B;
 },
 
 /**
@@ -3179,13 +3795,13 @@ bool
 },
 
 /**
- * @method setPasswordStyleText
- * @param {char} arg0
+ * @method isPasswordEnabled
+ * @return {bool}
  */
-setPasswordStyleText : function (
-char 
+isPasswordEnabled : function (
 )
 {
+    return false;
 },
 
 /**
@@ -3219,13 +3835,13 @@ str
 },
 
 /**
- * @method isPasswordEnabled
- * @return {bool}
- */
-isPasswordEnabled : function (
+ * @method setPlaceHolderColor
+* @param {color4b_object|color3b_object} color4b
+*/
+setPlaceHolderColor : function(
+color3b 
 )
 {
-    return false;
 },
 
 /**
@@ -3234,6 +3850,16 @@ isPasswordEnabled : function (
  */
 setTextHorizontalAlignment : function (
 texthalignment 
+)
+{
+},
+
+/**
+ * @method setTextColor
+ * @param {color4b_object} arg0
+ */
+setTextColor : function (
+color4b 
 )
 {
 },
@@ -3269,16 +3895,6 @@ bool
 },
 
 /**
- * @method setText
- * @param {String} arg0
- */
-setText : function (
-str 
-)
-{
-},
-
-/**
  * @method setTouchAreaEnabled
  * @param {bool} arg0
  */
@@ -3286,18 +3902,6 @@ setTouchAreaEnabled : function (
 bool 
 )
 {
-},
-
-/**
- * @method hitTest
- * @param {vec2_object} arg0
- * @return {bool}
- */
-hitTest : function (
-vec2 
-)
-{
-    return false;
 },
 
 /**
@@ -3453,6 +4057,16 @@ TextBMFont : function (
 ccui.PageView = {
 
 /**
+ * @method getCustomScrollThreshold
+ * @return {float}
+ */
+getCustomScrollThreshold : function (
+)
+{
+    return 0;
+},
+
+/**
  * @method getCurPageIndex
  * @return {long}
  */
@@ -3477,6 +4091,16 @@ bool
 },
 
 /**
+ * @method isUsingCustomScrollThreshold
+ * @return {bool}
+ */
+isUsingCustomScrollThreshold : function (
+)
+{
+    return false;
+},
+
+/**
  * @method getPage
  * @param {long} arg0
  * @return {ccui.Layout}
@@ -3494,6 +4118,26 @@ long
  */
 removePage : function (
 layout 
+)
+{
+},
+
+/**
+ * @method setUsingCustomScrollThreshold
+ * @param {bool} arg0
+ */
+setUsingCustomScrollThreshold : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setCustomScrollThreshold
+ * @param {float} arg0
+ */
+setCustomScrollThreshold : function (
+float 
 )
 {
 },
@@ -3595,17 +4239,29 @@ PageView : function (
 ccui.Helper = {
 
 /**
- * @method seekWidgetByTag
- * @param {ccui.Widget} arg0
- * @param {int} arg1
- * @return {ccui.Widget}
+ * @method getSubStringOfUTF8String
+ * @param {String} arg0
+ * @param {unsigned long} arg1
+ * @param {unsigned long} arg2
+ * @return {String}
  */
-seekWidgetByTag : function (
-widget, 
-int 
+getSubStringOfUTF8String : function (
+str, 
+long, 
+long 
 )
 {
-    return ccui.Widget;
+    return ;
+},
+
+/**
+ * @method changeLayoutSystemActiveState
+ * @param {bool} arg0
+ */
+changeLayoutSystemActiveState : function (
+bool 
+)
+{
 },
 
 /**
@@ -3634,6 +4290,44 @@ str
 )
 {
     return ccui.Widget;
+},
+
+/**
+ * @method seekWidgetByTag
+ * @param {ccui.Widget} arg0
+ * @param {int} arg1
+ * @return {ccui.Widget}
+ */
+seekWidgetByTag : function (
+widget, 
+int 
+)
+{
+    return ccui.Widget;
+},
+
+/**
+ * @method restrictCapInsetRect
+ * @param {rect_object} arg0
+ * @param {size_object} arg1
+ * @return {rect_object}
+ */
+restrictCapInsetRect : function (
+rect, 
+size 
+)
+{
+    return cc.Rect;
+},
+
+/**
+ * @method doLayout
+ * @param {cc.Node} arg0
+ */
+doLayout : function (
+node 
+)
+{
 },
 
 };
@@ -3852,31 +4546,11 @@ int
 },
 
 /**
- * @method setAnchorPoint
- * @param {vec2_object} arg0
- */
-setAnchorPoint : function (
-vec2 
-)
-{
-},
-
-/**
  * @method pushBackElement
  * @param {ccui.RichElement} arg0
  */
 pushBackElement : function (
 richelement 
-)
-{
-},
-
-/**
- * @method ignoreContentAdaptWithSize
- * @param {bool} arg0
- */
-ignoreContentAdaptWithSize : function (
-bool 
 )
 {
 },
@@ -4044,6 +4718,1174 @@ size
  * @constructor
  */
 RelativeBox : function (
+)
+{
+},
+
+};
+
+/**
+ * @class Scale9Sprite
+ */
+ccui.Scale9Sprite = {
+
+/**
+ * @method disableCascadeColor
+ */
+disableCascadeColor : function (
+)
+{
+},
+
+/**
+ * @method updateWithSprite
+* @param {cc.Sprite|cc.Sprite} sprite
+* @param {rect_object|rect_object} rect
+* @param {bool|bool} bool
+* @param {vec2_object|rect_object} vec2
+* @param {size_object} size
+* @param {rect_object} rect
+* @return {bool|bool}
+*/
+updateWithSprite : function(
+sprite,
+rect,
+bool,
+vec2,
+size,
+rect 
+)
+{
+    return false;
+},
+
+/**
+ * @method isFlippedX
+ * @return {bool}
+ */
+isFlippedX : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setScale9Enabled
+ * @param {bool} arg0
+ */
+setScale9Enabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setFlippedY
+ * @param {bool} arg0
+ */
+setFlippedY : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setFlippedX
+ * @param {bool} arg0
+ */
+setFlippedX : function (
+bool 
+)
+{
+},
+
+/**
+ * @method resizableSpriteWithCapInsets
+ * @param {rect_object} arg0
+ * @return {ccui.Scale9Sprite}
+ */
+resizableSpriteWithCapInsets : function (
+rect 
+)
+{
+    return ccui.Scale9Sprite;
+},
+
+/**
+ * @method disableCascadeOpacity
+ */
+disableCascadeOpacity : function (
+)
+{
+},
+
+/**
+ * @method setState
+ * @param {ccui.Scale9Sprite::State} arg0
+ */
+setState : function (
+state 
+)
+{
+},
+
+/**
+ * @method setInsetBottom
+ * @param {float} arg0
+ */
+setInsetBottom : function (
+float 
+)
+{
+},
+
+/**
+ * @method initWithSpriteFrameName
+* @param {String|String} str
+* @param {rect_object} rect
+* @return {bool|bool}
+*/
+initWithSpriteFrameName : function(
+str,
+rect 
+)
+{
+    return false;
+},
+
+/**
+ * @method getSprite
+ * @return {cc.Sprite}
+ */
+getSprite : function (
+)
+{
+    return cc.Sprite;
+},
+
+/**
+ * @method setInsetTop
+ * @param {float} arg0
+ */
+setInsetTop : function (
+float 
+)
+{
+},
+
+/**
+ * @method init
+* @param {cc.Sprite|cc.Sprite|cc.Sprite} sprite
+* @param {rect_object|rect_object|rect_object} rect
+* @param {rect_object|bool|bool} rect
+* @param {rect_object|vec2_object} rect
+* @param {size_object} size
+* @param {rect_object} rect
+* @return {bool|bool|bool}
+*/
+init : function(
+sprite,
+rect,
+bool,
+vec2,
+size,
+rect 
+)
+{
+    return false;
+},
+
+/**
+ * @method setPreferredSize
+ * @param {size_object} arg0
+ */
+setPreferredSize : function (
+size 
+)
+{
+},
+
+/**
+ * @method setSpriteFrame
+ * @param {cc.SpriteFrame} arg0
+ * @param {rect_object} arg1
+ */
+setSpriteFrame : function (
+spriteframe, 
+rect 
+)
+{
+},
+
+/**
+ * @method getBlendFunc
+ * @return {cc.BlendFunc}
+ */
+getBlendFunc : function (
+)
+{
+    return cc.BlendFunc;
+},
+
+/**
+ * @method getInsetBottom
+ * @return {float}
+ */
+getInsetBottom : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getCapInsets
+ * @return {rect_object}
+ */
+getCapInsets : function (
+)
+{
+    return cc.Rect;
+},
+
+/**
+ * @method isScale9Enabled
+ * @return {bool}
+ */
+isScale9Enabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getInsetRight
+ * @return {float}
+ */
+getInsetRight : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getOriginalSize
+ * @return {size_object}
+ */
+getOriginalSize : function (
+)
+{
+    return cc.Size;
+},
+
+/**
+ * @method initWithFile
+* @param {String|String|rect_object|String} str
+* @param {rect_object|rect_object|String} rect
+* @param {rect_object} rect
+* @return {bool|bool|bool|bool}
+*/
+initWithFile : function(
+str,
+rect,
+rect 
+)
+{
+    return false;
+},
+
+/**
+ * @method setBlendFunc
+ * @param {cc.BlendFunc} arg0
+ */
+setBlendFunc : function (
+blendfunc 
+)
+{
+},
+
+/**
+ * @method getInsetTop
+ * @return {float}
+ */
+getInsetTop : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setInsetLeft
+ * @param {float} arg0
+ */
+setInsetLeft : function (
+float 
+)
+{
+},
+
+/**
+ * @method initWithSpriteFrame
+* @param {cc.SpriteFrame|cc.SpriteFrame} spriteframe
+* @param {rect_object} rect
+* @return {bool|bool}
+*/
+initWithSpriteFrame : function(
+spriteframe,
+rect 
+)
+{
+    return false;
+},
+
+/**
+ * @method getPreferredSize
+ * @return {size_object}
+ */
+getPreferredSize : function (
+)
+{
+    return cc.Size;
+},
+
+/**
+ * @method setCapInsets
+ * @param {rect_object} arg0
+ */
+setCapInsets : function (
+rect 
+)
+{
+},
+
+/**
+ * @method isFlippedY
+ * @return {bool}
+ */
+isFlippedY : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getInsetLeft
+ * @return {float}
+ */
+getInsetLeft : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setInsetRight
+ * @param {float} arg0
+ */
+setInsetRight : function (
+float 
+)
+{
+},
+
+/**
+ * @method create
+* @param {String|rect_object|String|String} str
+* @param {rect_object|String|rect_object} rect
+* @param {rect_object} rect
+* @return {ccui.Scale9Sprite|ccui.Scale9Sprite|ccui.Scale9Sprite|ccui.Scale9Sprite|ccui.Scale9Sprite}
+*/
+create : function(
+str,
+rect,
+rect 
+)
+{
+    return ccui.Scale9Sprite;
+},
+
+/**
+ * @method createWithSpriteFrameName
+* @param {String|String} str
+* @param {rect_object} rect
+* @return {ccui.Scale9Sprite|ccui.Scale9Sprite}
+*/
+createWithSpriteFrameName : function(
+str,
+rect 
+)
+{
+    return ccui.Scale9Sprite;
+},
+
+/**
+ * @method createWithSpriteFrame
+* @param {cc.SpriteFrame|cc.SpriteFrame} spriteframe
+* @param {rect_object} rect
+* @return {ccui.Scale9Sprite|ccui.Scale9Sprite}
+*/
+createWithSpriteFrame : function(
+spriteframe,
+rect 
+)
+{
+    return ccui.Scale9Sprite;
+},
+
+/**
+ * @method Scale9Sprite
+ * @constructor
+ */
+Scale9Sprite : function (
+)
+{
+},
+
+};
+
+/**
+ * @class EditBox
+ */
+ccui.EditBox = {
+
+/**
+ * @method getText
+ * @return {char}
+ */
+getText : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setFontSize
+ * @param {int} arg0
+ */
+setFontSize : function (
+int 
+)
+{
+},
+
+/**
+ * @method setPlaceholderFontName
+ * @param {char} arg0
+ */
+setPlaceholderFontName : function (
+char 
+)
+{
+},
+
+/**
+ * @method getPlaceHolder
+ * @return {char}
+ */
+getPlaceHolder : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setFontName
+ * @param {char} arg0
+ */
+setFontName : function (
+char 
+)
+{
+},
+
+/**
+ * @method setText
+ * @param {char} arg0
+ */
+setText : function (
+char 
+)
+{
+},
+
+/**
+ * @method setPlaceholderFontSize
+ * @param {int} arg0
+ */
+setPlaceholderFontSize : function (
+int 
+)
+{
+},
+
+/**
+ * @method setInputMode
+ * @param {ccui.EditBox::InputMode} arg0
+ */
+setInputMode : function (
+inputmode 
+)
+{
+},
+
+/**
+ * @method setPlaceholderFontColor
+* @param {color4b_object|color3b_object} color4b
+*/
+setPlaceholderFontColor : function(
+color3b 
+)
+{
+},
+
+/**
+ * @method setFontColor
+* @param {color4b_object|color3b_object} color4b
+*/
+setFontColor : function(
+color3b 
+)
+{
+},
+
+/**
+ * @method setPlaceholderFont
+ * @param {char} arg0
+ * @param {int} arg1
+ */
+setPlaceholderFont : function (
+char, 
+int 
+)
+{
+},
+
+/**
+ * @method initWithSizeAndBackgroundSprite
+* @param {size_object|size_object} size
+* @param {ccui.Scale9Sprite|String} scale9sprite
+* @param {ccui.Widget::TextureResType} texturerestype
+* @return {bool|bool}
+*/
+initWithSizeAndBackgroundSprite : function(
+size,
+str,
+texturerestype 
+)
+{
+    return false;
+},
+
+/**
+ * @method setPlaceHolder
+ * @param {char} arg0
+ */
+setPlaceHolder : function (
+char 
+)
+{
+},
+
+/**
+ * @method setReturnType
+ * @param {ccui.EditBox::KeyboardReturnType} arg0
+ */
+setReturnType : function (
+keyboardreturntype 
+)
+{
+},
+
+/**
+ * @method setInputFlag
+ * @param {ccui.EditBox::InputFlag} arg0
+ */
+setInputFlag : function (
+inputflag 
+)
+{
+},
+
+/**
+ * @method getMaxLength
+ * @return {int}
+ */
+getMaxLength : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setMaxLength
+ * @param {int} arg0
+ */
+setMaxLength : function (
+int 
+)
+{
+},
+
+/**
+ * @method setFont
+ * @param {char} arg0
+ * @param {int} arg1
+ */
+setFont : function (
+char, 
+int 
+)
+{
+},
+
+/**
+ * @method create
+* @param {size_object|size_object} size
+* @param {String|ccui.Scale9Sprite} str
+* @param {ccui.Widget::TextureResType|ccui.Scale9Sprite} texturerestype
+* @param {ccui.Scale9Sprite} scale9sprite
+* @return {ccui.EditBox|ccui.EditBox}
+*/
+create : function(
+size,
+scale9sprite,
+scale9sprite,
+scale9sprite 
+)
+{
+    return ccui.EditBox;
+},
+
+/**
+ * @method EditBox
+ * @constructor
+ */
+EditBox : function (
+)
+{
+},
+
+};
+
+/**
+ * @class LayoutComponent
+ */
+ccui.LayoutComponent = {
+
+/**
+ * @method setStretchWidthEnabled
+ * @param {bool} arg0
+ */
+setStretchWidthEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setPercentWidth
+ * @param {float} arg0
+ */
+setPercentWidth : function (
+float 
+)
+{
+},
+
+/**
+ * @method getAnchorPosition
+ * @return {vec2_object}
+ */
+getAnchorPosition : function (
+)
+{
+    return cc.Vec2;
+},
+
+/**
+ * @method setPositionPercentXEnabled
+ * @param {bool} arg0
+ */
+setPositionPercentXEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setStretchHeightEnabled
+ * @param {bool} arg0
+ */
+setStretchHeightEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setActiveEnabled
+ * @param {bool} arg0
+ */
+setActiveEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method getRightMargin
+ * @return {float}
+ */
+getRightMargin : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getSize
+ * @return {size_object}
+ */
+getSize : function (
+)
+{
+    return cc.Size;
+},
+
+/**
+ * @method setAnchorPosition
+ * @param {vec2_object} arg0
+ */
+setAnchorPosition : function (
+vec2 
+)
+{
+},
+
+/**
+ * @method refreshLayout
+ */
+refreshLayout : function (
+)
+{
+},
+
+/**
+ * @method isPercentWidthEnabled
+ * @return {bool}
+ */
+isPercentWidthEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setVerticalEdge
+ * @param {ccui.LayoutComponent::VerticalEdge} arg0
+ */
+setVerticalEdge : function (
+verticaledge 
+)
+{
+},
+
+/**
+ * @method getTopMargin
+ * @return {float}
+ */
+getTopMargin : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setSizeWidth
+ * @param {float} arg0
+ */
+setSizeWidth : function (
+float 
+)
+{
+},
+
+/**
+ * @method getPercentContentSize
+ * @return {vec2_object}
+ */
+getPercentContentSize : function (
+)
+{
+    return cc.Vec2;
+},
+
+/**
+ * @method getVerticalEdge
+ * @return {ccui.LayoutComponent::VerticalEdge}
+ */
+getVerticalEdge : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setPercentWidthEnabled
+ * @param {bool} arg0
+ */
+setPercentWidthEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isStretchWidthEnabled
+ * @return {bool}
+ */
+isStretchWidthEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setLeftMargin
+ * @param {float} arg0
+ */
+setLeftMargin : function (
+float 
+)
+{
+},
+
+/**
+ * @method getSizeWidth
+ * @return {float}
+ */
+getSizeWidth : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setPositionPercentYEnabled
+ * @param {bool} arg0
+ */
+setPositionPercentYEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method getSizeHeight
+ * @return {float}
+ */
+getSizeHeight : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getPositionPercentY
+ * @return {float}
+ */
+getPositionPercentY : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getPositionPercentX
+ * @return {float}
+ */
+getPositionPercentX : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setTopMargin
+ * @param {float} arg0
+ */
+setTopMargin : function (
+float 
+)
+{
+},
+
+/**
+ * @method getPercentHeight
+ * @return {float}
+ */
+getPercentHeight : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getUsingPercentContentSize
+ * @return {bool}
+ */
+getUsingPercentContentSize : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setPositionPercentY
+ * @param {float} arg0
+ */
+setPositionPercentY : function (
+float 
+)
+{
+},
+
+/**
+ * @method setPositionPercentX
+ * @param {float} arg0
+ */
+setPositionPercentX : function (
+float 
+)
+{
+},
+
+/**
+ * @method setRightMargin
+ * @param {float} arg0
+ */
+setRightMargin : function (
+float 
+)
+{
+},
+
+/**
+ * @method isPositionPercentYEnabled
+ * @return {bool}
+ */
+isPositionPercentYEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setPercentHeight
+ * @param {float} arg0
+ */
+setPercentHeight : function (
+float 
+)
+{
+},
+
+/**
+ * @method setPercentOnlyEnabled
+ * @param {bool} arg0
+ */
+setPercentOnlyEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setHorizontalEdge
+ * @param {ccui.LayoutComponent::HorizontalEdge} arg0
+ */
+setHorizontalEdge : function (
+horizontaledge 
+)
+{
+},
+
+/**
+ * @method setPosition
+ * @param {vec2_object} arg0
+ */
+setPosition : function (
+vec2 
+)
+{
+},
+
+/**
+ * @method setUsingPercentContentSize
+ * @param {bool} arg0
+ */
+setUsingPercentContentSize : function (
+bool 
+)
+{
+},
+
+/**
+ * @method getLeftMargin
+ * @return {float}
+ */
+getLeftMargin : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getPosition
+ * @return {vec2_object}
+ */
+getPosition : function (
+)
+{
+    return cc.Vec2;
+},
+
+/**
+ * @method setSizeHeight
+ * @param {float} arg0
+ */
+setSizeHeight : function (
+float 
+)
+{
+},
+
+/**
+ * @method isPositionPercentXEnabled
+ * @return {bool}
+ */
+isPositionPercentXEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getBottomMargin
+ * @return {float}
+ */
+getBottomMargin : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setPercentHeightEnabled
+ * @param {bool} arg0
+ */
+setPercentHeightEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setPercentContentSize
+ * @param {vec2_object} arg0
+ */
+setPercentContentSize : function (
+vec2 
+)
+{
+},
+
+/**
+ * @method isPercentHeightEnabled
+ * @return {bool}
+ */
+isPercentHeightEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getPercentWidth
+ * @return {float}
+ */
+getPercentWidth : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getHorizontalEdge
+ * @return {ccui.LayoutComponent::HorizontalEdge}
+ */
+getHorizontalEdge : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method isStretchHeightEnabled
+ * @return {bool}
+ */
+isStretchHeightEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setBottomMargin
+ * @param {float} arg0
+ */
+setBottomMargin : function (
+float 
+)
+{
+},
+
+/**
+ * @method setSize
+ * @param {size_object} arg0
+ */
+setSize : function (
+size 
+)
+{
+},
+
+/**
+ * @method create
+ * @return {ccui.LayoutComponent}
+ */
+create : function (
+)
+{
+    return ccui.LayoutComponent;
+},
+
+/**
+ * @method bindLayoutComponent
+ * @param {cc.Node} arg0
+ * @return {ccui.LayoutComponent}
+ */
+bindLayoutComponent : function (
+node 
+)
+{
+    return ccui.LayoutComponent;
+},
+
+/**
+ * @method LayoutComponent
+ * @constructor
+ */
+LayoutComponent : function (
 )
 {
 },

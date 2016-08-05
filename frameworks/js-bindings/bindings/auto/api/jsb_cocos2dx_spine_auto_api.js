@@ -4,14 +4,188 @@
 var sp = sp || {};
 
 /**
- * @class Skeleton
+ * @class SkeletonRenderer
  */
 sp.Skeleton = {
+
+/**
+ * @method setTimeScale
+ * @param {float} arg0
+ */
+setTimeScale : function (
+float 
+)
+{
+},
+
+/**
+ * @method getDebugSlotsEnabled
+ * @return {bool}
+ */
+getDebugSlotsEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setAttachment
+* @param {String|String} str
+* @param {char|String} char
+* @return {bool|bool}
+*/
+setAttachment : function(
+str,
+str 
+)
+{
+    return false;
+},
+
+/**
+ * @method setBonesToSetupPose
+ */
+setBonesToSetupPose : function (
+)
+{
+},
+
+/**
+ * @method isOpacityModifyRGB
+ * @return {bool}
+ */
+isOpacityModifyRGB : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method initWithData
+ * @param {spSkeletonData} arg0
+ * @param {bool} arg1
+ */
+initWithData : function (
+spskeletondata, 
+bool 
+)
+{
+},
+
+/**
+ * @method setDebugSlotsEnabled
+ * @param {bool} arg0
+ */
+setDebugSlotsEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setSlotsToSetupPose
+ */
+setSlotsToSetupPose : function (
+)
+{
+},
+
+/**
+ * @method setOpacityModifyRGB
+ * @param {bool} arg0
+ */
+setOpacityModifyRGB : function (
+bool 
+)
+{
+},
 
 /**
  * @method setToSetupPose
  */
 setToSetupPose : function (
+)
+{
+},
+
+/**
+ * @method getBlendFunc
+ * @return {cc.BlendFunc}
+ */
+getBlendFunc : function (
+)
+{
+    return cc.BlendFunc;
+},
+
+/**
+ * @method drawSkeleton
+ * @param {mat4_object} arg0
+ * @param {unsigned int} arg1
+ */
+drawSkeleton : function (
+mat4, 
+int 
+)
+{
+},
+
+/**
+ * @method updateWorldTransform
+ */
+updateWorldTransform : function (
+)
+{
+},
+
+/**
+ * @method initialize
+ */
+initialize : function (
+)
+{
+},
+
+/**
+ * @method setDebugBonesEnabled
+ * @param {bool} arg0
+ */
+setDebugBonesEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method getDebugBonesEnabled
+ * @return {bool}
+ */
+getDebugBonesEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getTimeScale
+ * @return {float}
+ */
+getTimeScale : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method initWithFile
+* @param {String|String} str
+* @param {String|spAtlas} str
+* @param {float|float} float
+*/
+initWithFile : function(
+str,
+spatlas,
+float 
 )
 {
 },
@@ -27,103 +201,53 @@ blendfunc
 },
 
 /**
- * @method onDraw
- * @param {mat4_object} arg0
- * @param {unsigned int} arg1
- */
-onDraw : function (
-mat4, 
-int 
-)
-{
-},
-
-/**
- * @method setSlotsToSetupPose
- */
-setSlotsToSetupPose : function (
-)
-{
-},
-
-/**
- * @method setAttachment
- * @param {char} arg0
- * @param {char} arg1
- * @return {bool}
- */
-setAttachment : function (
-char, 
-char 
-)
-{
-    return false;
-},
-
-/**
- * @method getBlendFunc
- * @return {cc.BlendFunc}
- */
-getBlendFunc : function (
-)
-{
-    return cc.BlendFunc;
-},
-
-/**
  * @method setSkin
- * @param {char} arg0
- * @return {bool}
- */
-setSkin : function (
-char 
+* @param {char|String} char
+* @return {bool|bool}
+*/
+setSkin : function(
+str 
 )
 {
     return false;
 },
 
 /**
- * @method updateWorldTransform
+ * @method getSkeleton
+ * @return {spSkeleton}
  */
-updateWorldTransform : function (
+getSkeleton : function (
 )
 {
-},
-
-/**
- * @method setBonesToSetupPose
- */
-setBonesToSetupPose : function (
-)
-{
+    return spSkeleton;
 },
 
 /**
  * @method createWithFile
-* @param {char|char} char
-* @param {char|spAtlas} char
+* @param {String|String} str
+* @param {String|spAtlas} str
 * @param {float|float} float
-* @return {sp.Skeleton|sp.Skeleton}
+* @return {sp.SkeletonRenderer|sp.SkeletonRenderer}
 */
 createWithFile : function(
-char,
+str,
 spatlas,
 float 
 )
 {
-    return sp.Skeleton;
+    return sp.SkeletonRenderer;
 },
 
 /**
- * @method Skeleton
+ * @method SkeletonRenderer
  * @constructor
-* @param {char|spSkeletonData|char} char
-* @param {spAtlas|bool|char} spatlas
+* @param {spSkeletonData|String|String} spskeletondata
+* @param {bool|spAtlas|String} bool
 * @param {float|float} float
 */
-Skeleton : function(
-char,
-char,
+SkeletonRenderer : function(
+str,
+str,
 float 
 )
 {
@@ -137,6 +261,78 @@ float
 sp.SkeletonAnimation = {
 
 /**
+ * @method setStartListener
+ * @param {function} arg0
+ */
+setStartListener : function (
+func 
+)
+{
+},
+
+/**
+ * @method setTrackEventListener
+ * @param {spTrackEntry} arg0
+ * @param {function} arg1
+ */
+setTrackEventListener : function (
+sptrackentry, 
+func 
+)
+{
+},
+
+/**
+ * @method getState
+ * @return {spAnimationState}
+ */
+getState : function (
+)
+{
+    return spAnimationState;
+},
+
+/**
+ * @method setTrackCompleteListener
+ * @param {spTrackEntry} arg0
+ * @param {function} arg1
+ */
+setTrackCompleteListener : function (
+sptrackentry, 
+func 
+)
+{
+},
+
+/**
+ * @method onTrackEntryEvent
+ * @param {int} arg0
+ * @param {spEventType} arg1
+ * @param {spEvent} arg2
+ * @param {int} arg3
+ */
+onTrackEntryEvent : function (
+int, 
+speventtype, 
+spevent, 
+int 
+)
+{
+},
+
+/**
+ * @method setTrackStartListener
+ * @param {spTrackEntry} arg0
+ * @param {function} arg1
+ */
+setTrackStartListener : function (
+sptrackentry, 
+func 
+)
+{
+},
+
+/**
  * @method update
  * @param {float} arg0
  */
@@ -147,15 +343,65 @@ float
 },
 
 /**
+ * @method setCompleteListener
+ * @param {function} arg0
+ */
+setCompleteListener : function (
+func 
+)
+{
+},
+
+/**
+ * @method setTrackEndListener
+ * @param {spTrackEntry} arg0
+ * @param {function} arg1
+ */
+setTrackEndListener : function (
+sptrackentry, 
+func 
+)
+{
+},
+
+/**
+ * @method setEventListener
+ * @param {function} arg0
+ */
+setEventListener : function (
+func 
+)
+{
+},
+
+/**
  * @method setMix
- * @param {char} arg0
- * @param {char} arg1
+ * @param {String} arg0
+ * @param {String} arg1
  * @param {float} arg2
  */
 setMix : function (
-char, 
-char, 
+str, 
+str, 
 float 
+)
+{
+},
+
+/**
+ * @method setEndListener
+ * @param {function} arg0
+ */
+setEndListener : function (
+func 
+)
+{
+},
+
+/**
+ * @method initialize
+ */
+initialize : function (
 )
 {
 },
@@ -194,13 +440,13 @@ int
 
 /**
  * @method createWithFile
-* @param {char|char} char
-* @param {char|spAtlas} char
+* @param {String|String} str
+* @param {String|spAtlas} str
 * @param {float|float} float
 * @return {sp.SkeletonAnimation|sp.SkeletonAnimation}
 */
 createWithFile : function(
-char,
+str,
 spatlas,
 float 
 )
@@ -211,13 +457,13 @@ float
 /**
  * @method SkeletonAnimation
  * @constructor
-* @param {char|spSkeletonData|char} char
-* @param {spAtlas|char} spatlas
+* @param {spSkeletonData|String|String} spskeletondata
+* @param {spAtlas|String} spatlas
 * @param {float|float} float
 */
 SkeletonAnimation : function(
-char,
-char,
+str,
+str,
 float 
 )
 {

@@ -27,14 +27,14 @@
 var UIPageViewEditorTest = UIBaseLayer.extend({
     ctor: function () {
         this._super();
-        var root = ccs.uiReader.widgetFromJsonFile("res/cocosui/UIEditorTest/UIPageView_Editor/ui_pageview_editor_1.json");
+        var root = this._parseUIFile("res/cocosui/CCS/PageView/pageview_1.json");
         this._mainNode.addChild(root);
 
         var back_label =ccui.helper.seekWidgetByName(root, "back");
         back_label.addTouchEventListener(this.backEvent,this);
 
         var pageView =ccui.helper.seekWidgetByName(root, "PageView_1269");
-        pageView.addEventListenerPageView(this.pageViewEvent, this);
+        pageView.addEventListener(this.pageViewEvent, this);
     },
 
     pageViewEvent: function (sender, type) {

@@ -26,20 +26,25 @@
 //
 //------------------------------------------------------------------
 var ReflectionTestLayer = BaseTestLayer.extend({
-    _title:"cc.reflection",
-    _subtitle:"call java methods in js",
+    _title:"jsb.reflection",
+    _subtitle:"call java/objective-c methods in js",
 
     ctor:function() {
         this._super(cc.color(0,0,0,255), cc.color(98,99,117,255));
 
-        var label = cc.LabelTTF.create("Show Alert Dialog", "Arial", 35);
-        var menuItem = cc.MenuItemLabel.create(label, function(){
-            jsb.reflection.callStaticMethod("org/cocos2dx/js_tests/AppActivity", "showAlertDialog", "(Ljava/lang/String;Ljava/lang/String;)V", "How are you ?", "I'm great !");
+        var label = new cc.LabelTTF("Show Alert Dialog", "Arial", 35);
+        var menuItem = new cc.MenuItemLabel(label, function(){
+            if(cc.sys.os == cc.sys.OS_ANDROID){
+                jsb.reflection.callStaticMethod("org/cocos2dx/js_tests/AppActivity", "showAlertDialog", "(Ljava/lang/String;Ljava/lang/String;)V", "How are you ?", "I'm great !");
+            }else if(cc.sys.os == cc.sys.OS_IOS || cc.sys.os == cc.sys.OS_OSX){
+                var ret = jsb.reflection.callStaticMethod("NativeOcClass","callNativeUIWithTitle:andContent:","cocos2d-js","Yes! you call a Native UI from Reflection");
+                cc.log("ret val is "+ret);
+            }
         }, this);
         menuItem.x = winSize.width / 2;
         menuItem.y = winSize.height / 2;
 
-        var menu = cc.Menu.create(menuItem);
+        var menu = new cc.Menu(menuItem);
         menu.x = 0;
         menu.y = 0;
         

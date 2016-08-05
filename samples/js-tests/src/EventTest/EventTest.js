@@ -61,24 +61,24 @@ var EventTest = cc.Layer.extend({
 
         var s = director.getWinSize();
 
-        var label = cc.LabelTTF.create(this.title(), "Arial", 24);
+        var label = new cc.LabelTTF(this.title(), "Arial", 24);
         this.addChild(label);
         label.x = s.width / 2;
         label.y = s.height - 50;
 
         var subTitle = this.subtitle();
         if (subTitle && subTitle !== "") {
-            var l = cc.LabelTTF.create(subTitle, "Thonburi", 16);
+            var l = new cc.LabelTTF(subTitle, "Thonburi", 16);
             this.addChild(l, 1);
             l.x = s.width / 2;
             l.y = s.height - 80;
         }
 
-        var item1 = cc.MenuItemImage.create(s_pathB1, s_pathB2, this.backCallback, this);
-        var item2 = cc.MenuItemImage.create(s_pathR1, s_pathR2, this.restartCallback, this);
-        var item3 = cc.MenuItemImage.create(s_pathF1, s_pathF2, this.nextCallback, this);
+        var item1 = new cc.MenuItemImage(s_pathB1, s_pathB2, this.backCallback, this);
+        var item2 = new cc.MenuItemImage(s_pathR1, s_pathR2, this.restartCallback, this);
+        var item3 = new cc.MenuItemImage(s_pathF1, s_pathF2, this.nextCallback, this);
 
-        var menu = cc.Menu.create(item1, item2, item3);
+        var menu = new cc.Menu(item1, item2, item3);
         menu.x = 0;
         menu.y = 0;
         item1.x = s.width / 2 - 100;
@@ -117,7 +117,7 @@ var TouchOneByOneTest = EventTest.extend({
         }
 
         for( var i=0; i < 5;i++) {
-            var sprite = this.sprite = cc.Sprite.create(s_pathR2);
+            var sprite = this.sprite = new cc.Sprite(s_pathR2);
             this.addChild(sprite,i+10);
             sprite.x = 0;
             sprite.y = 0;
@@ -151,7 +151,7 @@ var TouchOneByOneTest = EventTest.extend({
 
     onTouchBegan:function(touch, event) {
         var pos = touch.getLocation();
-        var id = touch.getId();
+        var id = touch.getID();
         cc.log("onTouchBegan at: " + pos.x + " " + pos.y + " Id:" + id );
         if( pos.x < winSize.width/2) {
             event.getCurrentTarget().new_id(id,pos);
@@ -161,19 +161,19 @@ var TouchOneByOneTest = EventTest.extend({
     },
     onTouchMoved:function(touch, event) {
         var pos = touch.getLocation();
-        var id = touch.getId();
+        var id = touch.getID();
         cc.log("onTouchMoved at: " + pos.x + " " + pos.y + " Id:" + id );
         event.getCurrentTarget().update_id(id,pos);
     },
     onTouchEnded:function(touch, event) {
         var pos = touch.getLocation();
-        var id = touch.getId();
+        var id = touch.getID();
         cc.log("onTouchEnded at: " + pos.x + " " + pos.y + " Id:" + id );
         event.getCurrentTarget().release_id(id,pos);
     },
     onTouchCancelled:function(touch, event) {
         var pos = touch.getLocation();
-        var id = touch.getId();
+        var id = touch.getID();
         cc.log("onTouchCancelled at: " + pos.x + " " + pos.y + " Id:" + id );
         event.getCurrentTarget().update_id(id,pos);
     }
@@ -205,7 +205,7 @@ var TouchAllAtOnce = EventTest.extend({
         }
 
         for( var i=0; i < 5;i++) {
-            var sprite = this.sprite = cc.Sprite.create(s_pathR2);
+            var sprite = this.sprite = new cc.Sprite(s_pathR2);
             this.addChild(sprite,i+10);
             sprite.x = 0;
             sprite.y = 0;
@@ -242,7 +242,7 @@ var TouchAllAtOnce = EventTest.extend({
         for (var i=0; i < touches.length;i++ ) {
             var touch = touches[i];
             var pos = touch.getLocation();
-            var id = touch.getId();
+            var id = touch.getID();
             cc.log("Touch #" + i + ". onTouchesBegan at: " + pos.x + " " + pos.y + " Id:" + id);
             target.new_id(id,pos);
         }
@@ -252,7 +252,7 @@ var TouchAllAtOnce = EventTest.extend({
         for (var i=0; i < touches.length;i++ ) {
             var touch = touches[i];
             var pos = touch.getLocation();
-            var id = touch.getId();
+            var id = touch.getID();
             cc.log("Touch #" + i + ". onTouchesMoved at: " + pos.x + " " + pos.y + " Id:" + id);
             target.update_id(id, pos);
         }
@@ -262,7 +262,7 @@ var TouchAllAtOnce = EventTest.extend({
         for (var i=0; i < touches.length;i++ ) {
             var touch = touches[i];
             var pos = touch.getLocation();
-            var id = touch.getId();
+            var id = touch.getID();
             cc.log("Touch #" + i + ". onTouchesEnded at: " + pos.x + " " + pos.y + " Id:" + id);
             target.release_id(id);
         }
@@ -272,7 +272,7 @@ var TouchAllAtOnce = EventTest.extend({
         for (var i=0; i < touches.length;i++ ) {
             var touch = touches[i];
             var pos = touch.getLocation();
-            var id = touch.getId();
+            var id = touch.getID();
             cc.log("Touch #" + i + ". onTouchesCancelled at: " + pos.x + " " + pos.y + " Id:" + id);
             target.release_id(id);
         }
@@ -315,7 +315,7 @@ var AccelerometerTest = EventTest.extend({
                 }
             }, this);
 
-            var sprite = this.sprite = cc.Sprite.create(s_pathR2);
+            var sprite = this.sprite = new cc.Sprite(s_pathR2);
             this.addChild( sprite );
             sprite.x = winSize.width/2;
             sprite.y = winSize.height/2;
@@ -347,7 +347,7 @@ var AccelerometerTest = EventTest.extend({
 var MouseTest = EventTest.extend({
     init:function () {
         this._super();
-        var sprite = this.sprite = cc.Sprite.create(s_pathR2);
+        var sprite = this.sprite = new cc.Sprite(s_pathR2);
         this.addChild(sprite);
         sprite.x = 0;
         sprite.y = 0;
@@ -394,22 +394,54 @@ var MouseTest = EventTest.extend({
 //
 //------------------------------------------------------------------
 var KeyboardTest = EventTest.extend({
-    init:function () {
+    init: function () {
         this._super();
-
-        if( 'keyboard' in cc.sys.capabilities ) {
+        var self = this;
+        var label = new cc.LabelTTF("show key Code");
+        var size = cc.director.getWinSize();
+        label.setPosition(size.width / 2, size.height / 2);
+        this.addChild(label);
+        if ('keyboard' in cc.sys.capabilities) {
             cc.eventManager.addListener({
                 event: cc.EventListener.KEYBOARD,
-                onKeyPressed:function(key, event) {
-                    cc.log("Key down:" + key);
+                onKeyPressed: function (key, event) {
+                    var strTemp = "Key down:" + key;
+                    var keyStr = self.getKeyStr(key);
+                    if (keyStr.length > 0)
+                    {
+                        strTemp += " the key name is:" + keyStr;
+                    }
+                    label.setString(strTemp);
                 },
-                onKeyReleased:function(key, event) {
-                    cc.log("Key up:" + key);
+                onKeyReleased: function (key, event) {
+                    var strTemp = "Key up:" + key;
+                    var keyStr = self.getKeyStr(key);
+                    if (keyStr.length > 0)
+                    {
+                        strTemp += " the key name is:" + keyStr;
+                    }
+                    label.setString(strTemp);
                 }
             }, this);
         } else {
             cc.log("KEYBOARD Not supported");
         }
+    },
+    getKeyStr: function (keycode)
+    {
+        if (keycode == cc.KEY.none)
+        {
+            return "";
+        }
+
+        for (var keyTemp in cc.KEY)
+        {
+            if (cc.KEY[keyTemp] == keycode)
+            {
+                return keyTemp;
+            }
+        }
+        return "";
     },
     subtitle:function () {
         return "Keyboard test. Press keyboard and see console";

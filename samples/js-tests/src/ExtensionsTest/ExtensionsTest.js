@@ -71,12 +71,6 @@ var extensionsTestItemNames = [
         }
     },
     {
-        itemTitle:"EditBoxTest",
-        testScene:function () {
-            runEditBoxTest();
-        }
-    },
-    {
         itemTitle:"WebSocketTest",
         testScene:function () {
             runWebSocketTest();
@@ -96,19 +90,26 @@ var extensionsTestItemNames = [
     }
 ];
 
-if (cc.sys.isMobile && cc.sys.isNative) {
-     extensionsTestItemNames.push({
-        itemTitle:"PluginTest",
+if(!cc.sys.isNative || cc.sys.OS_LINUX !== cc.sys.os){
+    extensionsTestItemNames.push({
+        itemTitle:"EditBoxTest",
         testScene:function () {
-            var testScene = pluginXSceneManager.currentPluginXScene();
-            if (testScene) {
-                cc.director.runScene(testScene);
-            }
+            runEditBoxTest();
         }
     });
 }
 
-if (cc.sys.isNative) {
+if (cc.sys.isNative && cc.sys.OS_IOS == cc.sys.os) {
+    extensionsTestItemNames.push({
+        itemTitle:"PluginTest",
+        testScene:function () {
+            var testScene = pluginXSceneManager.currentPluginXScene();
+            cc.director.runScene(testScene);
+        }
+    })
+}
+
+if (cc.sys.isNative && cc.sys.OS_WINDOWS != cc.sys.os) {
     extensionsTestItemNames.push({
         itemTitle:"AssetsManagerTest",
         testScene:function () {
@@ -126,14 +127,14 @@ var ExtensionsMainLayer = cc.Layer.extend({
 
         var winSize = cc.director.getWinSize();
 
-        var pMenu = cc.Menu.create();
+        var pMenu = new cc.Menu();
         pMenu.x = 0;
         pMenu.y = 0;
         cc.MenuItemFont.setFontName("Arial");
         cc.MenuItemFont.setFontSize(24);
         for (var i = 0; i < extensionsTestItemNames.length; ++i) {
             var selItem = extensionsTestItemNames[i];
-            var pItem = cc.MenuItemFont.create(selItem.itemTitle, this.menuCallback, this);
+            var pItem = new cc.MenuItemFont(selItem.itemTitle, this.menuCallback, this);
             pItem.x = winSize.width / 2;
             pItem.y = winSize.height - (i + 1) * LINE_SPACE;
             pMenu.addChild(pItem, ITEM_TAG_BASIC + i);

@@ -24,27 +24,27 @@
  THE SOFTWARE.
  ****************************************************************************/
 var LAYOUT_RES = [
-    "res/cocosui/UIEditorTest/UILayout_Editor/UILayout_Editor/ui_layout_editor_1.json",
-    "res/cocosui/UIEditorTest/UILayout_Editor/UILayout_Color_Editor/ui_layout_color_editor_1.json",
-    "res/cocosui/UIEditorTest/UILayout_Editor/UILayout_Gradient_Color_Editor/ui_layout_gradient_color_editor_1_0.json",
-    "res/cocosui/UIEditorTest/UILayout_Editor/UILayout_BackgroundImage_Editor/ui_layout_backgroundimage_editor_1_0_0.json",
-    "res/cocosui/UIEditorTest/UILayout_Editor/UILayout_Scale9_BackgroundImage_Editor/ui_layout_scale9_backgroundimage_editor.json",
-    "res/cocosui/UIEditorTest/UILayout_Editor/UILayout_Linear_Vertical_Layout_Editor/ui_layout_linear_vertical_layout_editor.json",
-    "res/cocosui/UIEditorTest/UILayout_Editor/UILayout_Linear_Horizontal_Layout_Editor/ui_layout_linear_horizontal_layout_editor.json",
-    "res/cocosui/UIEditorTest/UILayout_Editor/UILayout_Relative_Align_Parent_Editor/ui_layout_relative_align_parent_editor.json",
-    "res/cocosui/UIEditorTest/UILayout_Editor/UILayout_Relative_Align_Location_Editor/ui_layout_relative_align_location_editor.json"
+    "res/cocosui/CCS/Layout/Layout/layout_1.json",
+    "res/cocosui/CCS/Layout/Color/color_1.json",
+    "res/cocosui/CCS/Layout/Gradient_Color/gradient_color_1.json",
+    "res/cocosui/CCS/Layout/BackgroundImage/backgroundimage_1.json",
+    "res/cocosui/CCS/Layout/Scale9/scale9.json",
+    "res/cocosui/CCS/Layout/Linear_Vertical/linear_vertical.json",
+    "res/cocosui/CCS/Layout/Linear_Horizontal/linear_horizontal.json",
+    "res/cocosui/CCS/Layout/Relative_Align_Parent/relative_align_parent.json",
+    "res/cocosui/CCS/Layout/Relative_Align_Location/relative_align_location.json"
 ];
 var LAYOUT_INDEX = 0;
 var UILayoutEditorTest = UIBaseLayer.extend({
     ctor: function () {
         this._super();
-        var root = ccs.uiReader.widgetFromJsonFile(LAYOUT_RES[LAYOUT_INDEX]);
+        var root = this._parseUIFile(LAYOUT_RES[LAYOUT_INDEX]);
         this._mainNode.addChild(root);
 
         var back_label = ccui.helper.seekWidgetByName(root, "back");
         back_label.addTouchEventListener(this.backEvent, this);
 
-        var left_button = ccui.Button.create();
+        var left_button = new ccui.Button();
         left_button.loadTextures("res/Images/b1.png", "res/Images/b2.png", "");
         left_button.x = 240-50;
         left_button.y = 50;
@@ -54,7 +54,7 @@ var UILayoutEditorTest = UIBaseLayer.extend({
         left_button.addTouchEventListener(this.previousCallback, this);
         this._mainNode.addChild(left_button);
 
-        var right_button = ccui.Button.create();
+        var right_button = new ccui.Button();
         right_button.loadTextures("res/Images/f1.png", "res/Images/f2.png", "");
         right_button.x = 240+50;
         right_button.y = 50;
@@ -81,7 +81,7 @@ var UILayoutEditorTest = UIBaseLayer.extend({
         }
     },
     runNextScene: function () {
-        var scene = cc.Scene.create();
+        var scene = new cc.Scene();
         scene.addChild(new UILayoutEditorTest());
         cc.director.runScene(scene);
     }
